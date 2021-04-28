@@ -18,6 +18,7 @@ class searchData extends React.Component {
     render() {
         return (
             <div>
+                <h1>Search Entity</h1>
                 <input type='text' value={this.state.query} onChange={this.handleChange}/>
                 <input type="submit" value="Search" onclick={this.handleSumbit}/>
             </div>
