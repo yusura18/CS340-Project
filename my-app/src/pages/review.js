@@ -1,17 +1,22 @@
 import React from 'react';
+import ReviewTable from '../components/ReviewTable';
+import ReviewForm from '../components/ReviewForm';
 
 const review = () => {
     return (
-        <div
-            style={{
-                display: 'flex',
-                justifyContent: 'Right',
-                alignItems: 'Right',
-                height: '100vh'
-            }}
-        >
-            <h1>Reviews</h1>
-        </div>    
+        <div>
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'Right',
+                    alignItems: 'Right',
+                }}
+            >
+                <h1>Reviews</h1>
+            </div>   
+            <ReviewForm/>
+            <ReviewTable/>  
+        </div>  
     );
 };
 
