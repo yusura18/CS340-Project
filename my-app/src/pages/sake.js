@@ -1,18 +1,27 @@
 import React from 'react';
+import SakeTable from '../SakeTable';
+import SakeForm from '../SakeForm';
+import SearchData from '../components/searchData';
 
 const sake = () => {
     return (
-        <div
-            style={{
-                display: 'flex',
-                justifyContent: 'Right',
-                alignItems: 'Right',
-                height: '100vh'
-            }}
-        >
-            <h1>Sake</h1>
+        <div>
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'Right',
+                    alignItems: 'Right',
 
-        </div>    
+                }}
+            >
+                <h1>Sake</h1>
+                
+
+            </div>
+            <SakeForm/>
+            <SearchData/>
+            <SakeTable/> 
+        </div>  
     );
 };
 
