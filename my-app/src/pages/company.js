@@ -1,6 +1,6 @@
 import React from 'react';
-import CompanyTable from '../CompanyTable';
-import CompanyForm from '../CompanyForm';
+import CompanyTable from '../components/CompanyTable';
+import CompanyForm from '../components/CompanyForm';
 
 
 const company = () => {

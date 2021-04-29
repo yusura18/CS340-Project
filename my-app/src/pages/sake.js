@@ -1,6 +1,6 @@
 import React from 'react';
-import SakeTable from '../SakeTable';
-import SakeForm from '../SakeForm';
+import SakeTable from '../components/SakeTable';
+import SakeForm from '../components/SakeForm';
 import SearchData from '../components/searchData';
 
 const sake = () => {
