@@ -1,5 +1,5 @@
-
-
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 
 /* props will have format:
 {entity: entityName, columns: [list of columns]}
@@ -10,7 +10,7 @@ function CompanyTable(props) {
   return (
 		<div>
 			<h1>Company Table</h1>
-			<table>
+			<Table striped bordered hover>
 				<thead>
 					<tr>
 						<th>companyID</th>
@@ -24,7 +24,7 @@ function CompanyTable(props) {
 					<CompanyRow companyID={2} companyName="Fake Name1" location="Osako" year="2015" />
 					<CompanyRow companyID={3} companyName="Fake Name2" location="Tokyo" year="1604" />
 				</tbody>
-			</table>
+			</Table>
 		</div>
 	);
 }
@@ -36,8 +36,8 @@ function CompanyRow(props) {
 			<td>{props.companyName}</td>
 			<td>{props.location}</td>
 			<td>{props.year}</td>
-			<button>Update</button>
-			<button>Delete</button>
+			<Button variant="warning" style={{margin: 3}}>Update</Button>
+			<Button variant="danger" style={{margin: 3}}>Delete</Button>
 		</tr>
 	);
 

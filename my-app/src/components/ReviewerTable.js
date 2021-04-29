@@ -1,4 +1,5 @@
-
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 
 
 /*
@@ -11,7 +12,7 @@ function ReviewerTable(props) {
     return (
           <div>
               <h1>Reviewer Table</h1>
-              <table>
+              <Table striped bordered hover>
                   <thead>
                       <tr>
                           <th>personID</th>
@@ -25,7 +26,7 @@ function ReviewerTable(props) {
                       <ReviewerRow personID={2} fName='Breanna' lName='Moore' email='temp@temp.com'/>
                       <ReviewerRow personID={3} fName='Foo' lName='Bar' email='temp@fake.com'/>
                   </tbody>
-              </table>
+              </Table>
           </div>
       );
   }
@@ -38,8 +39,8 @@ function ReviewerTable(props) {
               <td>{props.lName}</td>
               <td>{props.email}</td>
               <td>{props.comment}</td>
-              <button>Update</button>
-              <button>Delete</button>
+              <Button variant="warning" style={{margin: 3}}>Update</Button>
+			<Button variant="danger" style={{margin: 3}}>Delete</Button>
           </tr>
       );
   

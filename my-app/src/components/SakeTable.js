@@ -1,4 +1,5 @@
-
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 
 
 /* props will have format:
@@ -10,7 +11,7 @@ function SakeTable(props) {
   return (
 		<div>
 			<h1>Sake Table</h1>
-			<table>
+			<Table striped bordered hover>
 				<thead>
 					<tr>
 						<th>sakeID</th>
@@ -27,7 +28,7 @@ function SakeTable(props) {
 					<SakeRow sakeID={2} sakeName="Fake Name1" companyID={24} region="Kyushu" sakeStyle="hardcoded" cultivar="hardcoded" avgRating={0.24}/>
 					<SakeRow sakeID={3} sakeName="Fake Name2" companyID={15} region="Hokkaido" sakeStyle="hardcoded" cultivar="hardcoded" avgRating={2.88}/>
 				</tbody>
-			</table>
+			</Table>
 		</div>
 	);
 }
@@ -42,8 +43,8 @@ function SakeRow(props) {
 			<td>{props.sakeStyle}</td>
 			<td>{props.cultivar}</td>
 			<td>{props.avgRating}</td>
-			<button>Update</button>
-			<button>Delete</button>
+			<Button variant="warning" style={{margin: 3}}>Update</Button>
+			<Button variant="danger" style={{margin: 3}}>Delete</Button>
 		</tr>
 	);
 
