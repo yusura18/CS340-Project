@@ -4,16 +4,7 @@ import ReviewerForm from '../components/ReviewerForm';
 
 const reviewer = () => {
     return (
-        <div>
-            <div
-                style={{
-                    display: 'flex',
-                    justifyContent: 'Right',
-                    alignItems: 'Right',
-                }}
-            >
-                <h1>Reviewers</h1>
-            </div>   
+        <div>  
             <ReviewerForm/>
             <ReviewerTable/>  
         </div>   

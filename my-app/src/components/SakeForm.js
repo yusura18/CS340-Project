@@ -15,7 +15,7 @@ class SakeForm extends React.Component {
     super(props);
     this.state = {
 			sakeName: '',
-			companyName: '',
+			companyID: '',
 			region: '',
 			style: '',
 			cultivar: ''
@@ -35,7 +35,7 @@ class SakeForm extends React.Component {
 	}
 
   handleSubmit(event) {
-    alert('form was submited with: ' + this.state.sakeName + this.state.companyName + this.state.region + this.state.style + this.state.cultivar);
+    alert('form was submited with: ' + this.state.sakeName + this.state.companyID + this.state.region + this.state.style + this.state.cultivar);
     event.preventDefault();
   }
 
@@ -44,15 +44,15 @@ class SakeForm extends React.Component {
 	render() {
 		return (
 			<div>
-				<h1>Sake Form</h1>
+				<h1>Add a Sake</h1>
 				<form>
 					<label>
 						Sake Name:
 						<input type="text" name="sakeName" value={this.state.sakeName} onChange={this.handleInputChange}/>
 					</label>
 					<label>
-						Company Name:
-						<input type="text" name="companyName" value={this.state.companyName} onChange={this.handleInputChange}/>
+						Company ID:
+						<input type="number" name="companyID" value={this.state.companyID} onChange={this.handleInputChange}/>
 					</label>
 					<label>
 						Region:

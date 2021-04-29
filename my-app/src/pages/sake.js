@@ -6,18 +6,6 @@ import SearchData from '../components/searchData';
 const sake = () => {
     return (
         <div>
-            <div
-                style={{
-                    display: 'flex',
-                    justifyContent: 'Right',
-                    alignItems: 'Right',
-
-                }}
-            >
-                <h1>Sake</h1>
-                
-
-            </div>
             <SakeForm/>
             <SearchData/>
             <SakeTable/> 

@@ -4,16 +4,7 @@ import ReviewForm from '../components/ReviewForm';
 
 const review = () => {
     return (
-        <div>
-            <div
-                style={{
-                    display: 'flex',
-                    justifyContent: 'Right',
-                    alignItems: 'Right',
-                }}
-            >
-                <h1>Reviews</h1>
-            </div>   
+        <div> 
             <ReviewForm/>
             <ReviewTable/>  
         </div>  

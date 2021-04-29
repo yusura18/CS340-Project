@@ -39,7 +39,7 @@ class CompanyForm extends React.Component {
 	render() {
 		return (
 			<div>
-				<h1>Company Form</h1>
+				<h1>Add a Company</h1>
 				<form>
 					<label>
 						Company Name:

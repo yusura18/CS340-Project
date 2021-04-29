@@ -12,8 +12,8 @@ class ReviewForm extends React.Component {
 	constructor(props) {
     super(props);
     this.state = {
-			sake: '',
-			person: '',
+			sakeID: '',
+			personID: '',
 			rating: '',
             comment: ''
 		};
@@ -32,7 +32,7 @@ class ReviewForm extends React.Component {
 	}
 
   handleSubmit(event) {
-    alert('form was submited with: ' + this.state.sake + this.state.person + this.state.rating + this.state.comment);
+    alert('form was submited with: ' + this.state.sakeID + this.state.personID + this.state.rating + this.state.comment);
     event.preventDefault();
   }
 
@@ -41,15 +41,15 @@ class ReviewForm extends React.Component {
 	render() {
 		return (
 			<div>
-				<h1>Review Form</h1>
+				<h1>Add a Review</h1>
 				<form>
 					<label>
-						Sake Name:
-						<input type="text" name="sake" value={this.state.sake} onChange={this.handleInputChange}/>
+						Sake ID:
+						<input type="number" name="sakeID" value={this.state.sakeID} onChange={this.handleInputChange}/>
 					</label>
 					<label>
-						Reviewer's Name:
-						<input type="text" name="person" value={this.state.person} onChange={this.handleInputChange}/>
+						Reviewer ID:
+						<input type="number" name="personID" value={this.state.personID} onChange={this.handleInputChange}/>
 					</label>
 					<label>
                         Rating:
