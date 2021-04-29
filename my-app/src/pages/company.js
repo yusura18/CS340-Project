@@ -5,7 +5,12 @@ import CompanyForm from '../components/CompanyForm';
 
 const company = () => {
     return (
-        <div>  
+        <div>
+             <br />
+            <div class="container shadow-sm rounded border border-dark">
+                <p>This page is for adding, updating, and deleting rows from the company table.</p>
+            </div>
+            <br />  
             <CompanyForm/>
             <CompanyTable/>  
         </div>
