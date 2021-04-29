@@ -17,10 +17,11 @@ function App() {
       <Router>
         <Navbar />
         <Switch>
-          <Route path='/sake' component={sake} />
-          <Route path='/company' component={company} />
-          <Route path='/review' component={review} />
-          <Route path='/reviewer' component={reviewer} />
+          <Route exact path='/' component={sake} />
+          <Route exact path='/sake' component={sake} />
+          <Route exact path='/company' component={company} />
+          <Route exact path='/review' component={review} />
+          <Route exact path='/reviewer' component={reviewer} />
         </Switch>
       </Router>
       
