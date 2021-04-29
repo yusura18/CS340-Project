@@ -6,6 +6,7 @@ import sake from './pages/sake';
 import company from './pages/company';
 import review from './pages/review';
 import reviewer from './pages/reviewer';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 // Need to render components (form, tables, search field) for each page
