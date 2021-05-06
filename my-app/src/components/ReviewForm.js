@@ -11,18 +11,18 @@ import Button from 'react-bootstrap/Button';
 */
 class ReviewForm extends React.Component {
 	constructor(props) {
-    super(props);
-    this.state = {
+		super(props);
+		this.state = {
 			sakeID: '',
 			personID: '',
 			rating: 0,
-            comment: ''
-		};
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+			comment: ''
+			};
+		this.handleInputChange = this.handleInputChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+  	}
 
-  handleInputChange (event) {
+  	handleInputChange (event) {
 		const target = event.target;
 		const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
@@ -32,10 +32,10 @@ class ReviewForm extends React.Component {
 		});
 	}
 
-  handleSubmit(event) {
-    alert('form was submited with: ' + this.state.sakeID + this.state.personID + this.state.rating + this.state.comment);
-    event.preventDefault();
-  }
+  	handleSubmit(event) {
+		alert('form was submited with: ' + this.state.sakeID + this.state.personID + this.state.rating + this.state.comment);
+		event.preventDefault();
+  	}
 
 	render() {
 		return (
