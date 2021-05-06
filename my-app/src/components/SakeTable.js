@@ -1,3 +1,5 @@
+import React from 'react';
+import { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 
@@ -24,6 +26,7 @@ function SakeTable(props) {
 					</tr>
 				</thead>
 				<tbody id="tableBody">
+					<SakeRowTest sakeID={1} sakeName="Fake Name" companyID={15} region="Nara" sakeStyle="Couldn't Tell You" cultivar="Same" avgRating={2.75}/>
 					<SakeRow sakeID={1} sakeName="Fake Name" companyID={15} region="Nara" sakeStyle="Couldn't Tell You" cultivar="Same" avgRating={2.75}/>
 					<SakeRow sakeID={2} sakeName="Fake Name1" companyID={24} region="Kyushu" sakeStyle="hardcoded" cultivar="hardcoded" avgRating={0.24}/>
 					<SakeRow sakeID={3} sakeName="Fake Name2" companyID={15} region="Hokkaido" sakeStyle="hardcoded" cultivar="hardcoded" avgRating={2.88}/>
@@ -48,6 +51,65 @@ function SakeRow(props) {
 		</tr>
 	);
 
+}
+
+
+function SakeRowTest(props) {
+	const [editMode, toggleEdit] = useState(false);
+	const [sakeName, setSakeName] = useState(props.sakeName);
+	const [companyID, setCompanyID] = useState(props.companyID);
+	const [region, setRegion] = useState(props.region);
+	const [sakeStyle, setSakeStyle] = useState(props.sakeStyle);
+	const [cultivar, setCultivar] = useState(props.cultivar);
+
+	const updateRow = (data) => {
+		toggleEdit(!editMode);
+		// TODO: Send UPDATE query to database.  Refresh row's data
+	}
+	
+	return (
+
+		<tr>
+			<td>{props.sakeID}</td>
+			{editMode ?
+			<td>
+				<input name='sakeName' value={sakeName} type='text' onChange={e => setSakeName(e.target.value)}/>
+			</td>
+			: <td>{props.sakeName}</td>
+			}
+			{editMode ?
+			<td>
+				<input name='companyID' value={companyID} type='number' onChange={e => setCompanyID(e.target.value)}/>
+			</td>
+			: <td>{props.companyID}</td>
+			}
+			{editMode ?
+			<td>
+				<input name='region' value={region} type='text' onChange={e => setRegion(e.target.value)}/>
+			</td>
+			: <td>{props.region}</td>
+			}
+			{editMode ?
+			<td>
+				<input name='sakeStyle' value={sakeStyle} type='text' onChange={e => setSakeStyle(e.target.value)}/>
+			</td>
+			: <td>{props.sakeStyle}</td>
+			}
+			{editMode ?
+			<td>
+				<input name='cultivar' value={cultivar} type='text' onChange={e => setCultivar(e.target.value)}/>
+			</td>
+			: <td>{props.cultivar}</td>
+			}
+			<td>{props.avgRating}</td>
+			
+			{editMode 
+			? <Button variant="success" style={{margin: 3}} onClick={() => toggleEdit(!editMode)}>Confirm</Button>
+			: <Button variant="warning" style={{margin: 3}} onClick={() => toggleEdit(!editMode)}>Edit</Button>
+			}
+			<Button variant="danger" style={{margin: 3}}>Delete</Button>
+		</tr>
+	);
 }
 
 
