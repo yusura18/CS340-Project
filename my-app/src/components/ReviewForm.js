@@ -15,7 +15,7 @@ class ReviewForm extends React.Component {
     this.state = {
 			sakeID: '',
 			personID: '',
-			rating: '',
+			rating: 0,
             comment: ''
 		};
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -37,8 +37,6 @@ class ReviewForm extends React.Component {
     event.preventDefault();
   }
 
-
-
 	render() {
 		return (
 			<div>
@@ -54,8 +52,12 @@ class ReviewForm extends React.Component {
 					</label>
 					<label>
                         Rating:
-                        {/* TODO: Add range limits on the input */}
-						<input type="number" name="rating" value={this.state.rating} onChange={this.handleInputChange}/>
+						<select value={this.state.rating} name='rating' onChange={this.handleInputChange}>
+							<option value={0}>0</option>
+							<option value={1}>1</option>
+							<option value={2}>2</option>
+							<option value={3}>3</option>
+						</select>
 					</label>
 					<label>
 						Comment:
