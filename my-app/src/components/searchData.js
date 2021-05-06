@@ -29,7 +29,7 @@ class searchData extends React.Component {
     }
 
     handleClear(event) {
-        
+
     }
     
     render() {
@@ -51,7 +51,7 @@ class searchData extends React.Component {
                 <label>
                     Enter query:
                     <div>
-                        {this.state.attribute == 'companyID'
+                        {this.state.attribute === 'companyID'
                             ? <input type='number' value={this.state.query} name='query' onChange={this.handleInputChange}/>
                             : <input type='text' value={this.state.query} name='query' onChange={this.handleInputChange}/>
                         }
