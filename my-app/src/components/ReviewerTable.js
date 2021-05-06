@@ -39,7 +39,7 @@ function ReviewerTable(props) {
               <td>{props.lName}</td>
               <td>{props.email}</td>
               <td>{props.comment}</td>
-              <Button variant="warning" style={{margin: 3}}>Update</Button>
+              <Button variant="warning" style={{margin: 3}}>Edit</Button>
 			<Button variant="danger" style={{margin: 3}}>Delete</Button>
           </tr>
       );

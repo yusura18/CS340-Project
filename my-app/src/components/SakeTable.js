@@ -46,14 +46,14 @@ function SakeRow(props) {
 			<td>{props.sakeStyle}</td>
 			<td>{props.cultivar}</td>
 			<td>{props.avgRating}</td>
-			<Button variant="warning" style={{margin: 3}}>Update</Button>
+			<Button variant="warning" style={{margin: 3}}>Edit</Button>
 			<Button variant="danger" style={{margin: 3}}>Delete</Button>
 		</tr>
 	);
 
 }
 
-
+// Test component to test row editing
 function SakeRowTest(props) {
 	const [editMode, toggleEdit] = useState(false);
 	const [sakeName, setSakeName] = useState(props.sakeName);

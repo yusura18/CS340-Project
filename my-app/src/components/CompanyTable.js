@@ -36,7 +36,7 @@ function CompanyRow(props) {
 			<td>{props.companyName}</td>
 			<td>{props.location}</td>
 			<td>{props.year}</td>
-			<Button variant="warning" style={{margin: 3}}>Update</Button>
+			<Button variant="warning" style={{margin: 3}}>Edit</Button>
 			<Button variant="danger" style={{margin: 3}}>Delete</Button>
 		</tr>
 	);
