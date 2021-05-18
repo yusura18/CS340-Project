@@ -5,26 +5,49 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
-const getURL = "http://flip3.engr.oregonstate.edu:XXXX/sake/";
+const baseURL = "http://localhost:6531/sake/";
 
 /* props will have format:
 {entity: entityName, columns: [list of columns]}
 
 Probably will make a separate component for the row
 */
+// function getData() {
+// 	console.log('fetching sake data...');
+// 	const data = null;
+// 	axios.get(baseURL, { crossDomain: true })
+// 		.then(res => {
+// 			const load = res.data.sake
+// 			console.log(load);
+// 			data = load;
+// 			console.log("data set");
+// 		})
+// 		.catch((err) =>{
+// 			console.log("get request error...")
+// 			console.log(err);
+// 		})
+// 	return data;
+// }
+
 function SakeTable(props) {
 	const [sakeData, setData] = useState([]);
 
-	useEffect(() =>{
+	useEffect(() => {
 		console.log('fetching sake data...');
-		axios.get(getURL)
+		axios.get(baseURL, { crossDomain: true })
 			.then(res => {
-				console.log(res.data);
-				setData(res.data);
+				const load = JSON.parse(res.data.sake);
+				console.log(load);
+				console.log("data set");
+				setData(load);
+			})
+			.catch((err) =>{
+				console.log("get request error...")
+				console.log(err);
 			})
 	}, []);
 
-
+	
   	return (
 		<div>
 			<h1>Sake Table</h1>
@@ -47,8 +70,8 @@ function SakeTable(props) {
 					<SakeRow sakeID={3} sakeName="Fake Name2" companyID={15} region="Hokkaido" sakeStyle="hardcoded" cultivar="hardcoded" avgRating={2.88}/>
 				</tbody> */}
 				<tbody>
-					{sakeData.map((row, index) => {
-						<SakeRowTest key={index} sakeID={row.sakeID} sakeName={row.sakeName} companyID={row.companyID} region={row.region} sakeStyle={row.sakeStyle} cultivar={row.cultivar} avgRating={row.averageRating}/>
+					{sakeData.map((row) => {
+						<SakeRowTest sakeID={row.sakeID} sakeName={row.sakeName} companyID={row.companyID} region={row.region} sakeStyle={row.sakeStyle} cultivar={row.cultivar} avgRating={row.averageRating}/>
 					})}
 
 
@@ -87,8 +110,17 @@ function SakeRowTest(props) {
 	const updateRow = (data) => {
 		toggleEdit(!editMode);
 		// TODO: Send UPDATE query to database.  Refresh row's data
+
 	}
 	
+	const deleteRow = () => {
+		axios.delete(`${baseURL}:${props.sakeID}`)
+		.then(res => {
+			console.log(res);
+			console.log(res.data);
+      	})
+	}
+
 	return (
 
 		<tr>
@@ -124,12 +156,13 @@ function SakeRowTest(props) {
 			: <td>{props.cultivar}</td>
 			}
 			<td>{props.avgRating}</td>
-			
+			<td>
 			{editMode 
 			? <Button variant="success" style={{margin: 3}} onClick={() => toggleEdit(!editMode)}>Confirm</Button>
 			: <Button variant="warning" style={{margin: 3}} onClick={() => toggleEdit(!editMode)}>Edit</Button>
 			}
-			<Button variant="danger" style={{margin: 3}}>Delete</Button>
+			<Button variant="danger" style={{margin: 3}} onClick={() => deleteRow()}>Delete</Button>
+			</td>
 		</tr>
 	);
 }
