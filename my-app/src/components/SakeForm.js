@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 
 /*
 	sakeID
@@ -15,17 +16,17 @@ const baseURL = "http://flip3.engr.oregonstate.edu:XXXX/sake/";
 
 class SakeForm extends React.Component {
 	constructor(props) {
-    super(props);
-    this.state = {
+		super(props);
+		this.state = {
 			sakeName: '',
 			companyID: '',
 			region: '',
 			style: '',
 			cultivar: ''
 		};
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+		this.handleInputChange = this.handleInputChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+  	}
 
 	handleInputChange (event) {
 		const target = event.target;
@@ -40,7 +41,7 @@ class SakeForm extends React.Component {
   	handleSubmit(event) {
 		event.preventDefault();
 
-		payload = this.state
+		const payload = this.state;
 
 		axios.post(baseURL, { payload })
 			.then(res => {
