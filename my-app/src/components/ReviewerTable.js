@@ -1,6 +1,11 @@
+import React, {
+	useState, useEffect,
+	} from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 
+const baseURL = "http://localhost:6531/reviewer/";
 
 /*
 	personID
@@ -8,7 +13,14 @@ import Button from 'react-bootstrap/Button';
     lName
     email
 */
+
 function ReviewerTable(props) {
+    const testArray = [
+		{personID: 0, fName: "test10", lName: "test11", email: "test12"},
+		{personID: 1, fName: "test20", lName: "test21", email: "test22"},
+		{personID: 2, fName: "test30", lName: "test31", email: "test32"}
+	];
+
     return (
           <div>
               <h1>Reviewer Table</h1>
@@ -22,29 +34,82 @@ function ReviewerTable(props) {
                       </tr>
                   </thead>
                   <tbody id="tableBody">
-                      <ReviewerRow personID={1} fName='Kaewan' lName='Gardi' email='fake@fake.com'/>
-                      <ReviewerRow personID={2} fName='Breanna' lName='Moore' email='temp@temp.com'/>
-                      <ReviewerRow personID={3} fName='Foo' lName='Bar' email='temp@fake.com'/>
+                    {testArray.map((row, index) => {
+						return(
+							<ReviewerRow personID={row.personID} fName={row.fName} lName={row.lName} email={row.email} />)
+					})}
                   </tbody>
               </Table>
           </div>
       );
   }
+
+function ReviewerRow(props) {
+	const [editMode, toggleEdit] = useState(false);
+	const [fName, setFName] = useState(props.fName);
+	const [lName, setLName] = useState(props.lName);
+	const [email, setEmail] = useState(props.email);
+
+	const updateRow = (data) => {
+		toggleEdit(!editMode);
+		// TODO: Send UPDATE query to database.  Refresh row's data
+
+	}
+	
+	const deleteRow = () => {
+		axios.delete(`${baseURL}:${props.personID}`)
+		.then(res => {
+			console.log(res);
+			console.log(res.data);
+      	})
+	}
+
+	return (
+		<tr>
+			<td>{props.personID}</td>
+			{editMode ?
+			<td>
+				<input name='fName' value={fName} type='text' onChange={e => setFName(e.target.value)}/>
+			</td>
+			: <td>{props.fName}</td>
+			}
+			{editMode ?
+			<td>
+				<input name='lName' value={lName} type='text' onChange={e => setLName(e.target.value)}/>
+			</td>
+			: <td>{props.lName}</td>
+			}
+			{editMode ?
+			<td>
+				<input name='email' value={email} type='text' onChange={e => setEmail(e.target.value)}/>
+			</td>
+			: <td>{props.email}</td>
+			}
+			<td>
+			{editMode 
+			? <Button variant="success" style={{margin: 3}} onClick={() => toggleEdit(!editMode)}>Confirm</Button>
+			: <Button variant="warning" style={{margin: 3}} onClick={() => toggleEdit(!editMode)}>Edit</Button>
+			}
+			<Button variant="danger" style={{margin: 3}} onClick={() => deleteRow()}>Delete</Button>
+			</td>
+		</tr>
+	);
+}
+
+
+// function ReviewerRow(props) {
+//     return (
+//         <tr>
+//             <td>{props.personID}</td>
+//             <td>{props.fName}</td>
+//             <td>{props.lName}</td>
+//             <td>{props.email}</td>
+//             <Button variant="warning" style={{margin: 3}}>Edit</Button>
+// 			<Button variant="danger" style={{margin: 3}}>Delete</Button>
+//         </tr>
+//     );
   
-  function ReviewerRow(props) {
-      return (
-          <tr>
-              <td>{props.personID}</td>
-              <td>{props.fName}</td>
-              <td>{props.lName}</td>
-              <td>{props.email}</td>
-              <td>{props.comment}</td>
-              <Button variant="warning" style={{margin: 3}}>Edit</Button>
-			<Button variant="danger" style={{margin: 3}}>Delete</Button>
-          </tr>
-      );
-  
-  }
+// }
   
   
   export default ReviewerTable

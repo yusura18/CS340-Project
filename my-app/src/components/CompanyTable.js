@@ -37,7 +37,7 @@ function CompanyTable(props) {
 				<tbody id="tableBody">
 					{testArray.map((row, index) => {
 						return(
-							<CompanyRow companyID={2} companyName="Fake Name1" location="Osako" year="2015" />)
+							<CompanyRow companyID={row.companyID} companyName={row.companyName} location={row.location} year={row.year} />)
 					})}
 				</tbody>
 			</Table>
