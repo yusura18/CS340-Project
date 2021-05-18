@@ -10,17 +10,30 @@ const baseURL = "http://localhost:6531/company/";
 
 
 function CompanyTable(props) {
-	// Temp hardcoded values
-	const testArray = [
-		{companyID: 0, companyName: "test10", location: "test11", year: "test12"},
-		{companyID: 1, companyName: "test20", location: "test21", year: "test22"},
-		{companyID: 2, companyName: "test30", location: "test31", year: "test32"}
-	];
-	const renderRows = () => {
-		return testArray(
+	const [companyData, setData] = useState([]);
 
-		)
-	}
+	useEffect(() => {
+		console.log('fetching company data...');
+		axios.get(baseURL, { crossDomain: true })
+			.then(res => {
+				console.log(res);
+				const load = JSON.parse(res.data.company);
+				console.log(load);
+				console.log("data set");
+				setData(load);
+			})
+			.catch((err) =>{
+				console.log("get request error...")
+				console.log(err);
+			})
+	}, []);
+	// Temp hardcoded values
+	// const testArray = [
+	// 	{companyID: 0, companyName: "test10", location: "test11", year: "test12"},
+	// 	{companyID: 1, companyName: "test20", location: "test21", year: "test22"},
+	// 	{companyID: 2, companyName: "test30", location: "test31", year: "test32"}
+	// ];
+
 
   	return (
 		<div>
@@ -35,7 +48,7 @@ function CompanyTable(props) {
 					</tr>
 				</thead>
 				<tbody id="tableBody">
-					{testArray.map((row, index) => {
+					{companyData.map((row, index) => {
 						return(
 							<CompanyRow companyID={row.companyID} companyName={row.companyName} location={row.location} year={row.year} />)
 					})}
@@ -67,7 +80,7 @@ function CompanyRow(props) {
 	}
 
 	return (
-		<tr>
+		<tr key={props.companyID}>
 			<td>{props.companyID}</td>
 			{editMode ?
 			<td>

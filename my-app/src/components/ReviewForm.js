@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 
@@ -9,6 +10,8 @@ import Button from 'react-bootstrap/Button';
     comment 
 
 */
+const baseURL = "http://localhost:6531/review/";
+
 class ReviewForm extends React.Component {
 	constructor(props) {
 		super(props);
@@ -33,8 +36,15 @@ class ReviewForm extends React.Component {
 	}
 
   	handleSubmit(event) {
-		alert('form was submited with: ' + this.state.sakeID + this.state.personID + this.state.rating + this.state.comment);
+		// alert('form was submited with: ' + this.state.sakeID + this.state.personID + this.state.rating + this.state.comment);
 		event.preventDefault();
+		console.log("sending review post");
+		const payload = this.state;
+
+		axios.post(baseURL, { payload })
+			.then(res => {
+				console.log(res.status);
+			})
   	}
 
 	render() {

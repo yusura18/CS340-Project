@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 
@@ -7,6 +8,8 @@ import Button from 'react-bootstrap/Button';
 	location
 	year
 */
+const baseURL = "http://localhost:6531/company/";
+
 
 class CompanyForm extends React.Component {
 	constructor(props) {
@@ -23,7 +26,7 @@ class CompanyForm extends React.Component {
   handleInputChange (event) {
 		const target = event.target;
 		const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+    	const name = target.name;
 
 		this.setState({
 			[name]: value
@@ -31,8 +34,14 @@ class CompanyForm extends React.Component {
 	}
 
   handleSubmit(event) {
-    alert('form was submited with: ' + this.state.companyName + this.state.location + this.state.year);
+    // alert('form was submited with: ' + this.state.companyName + this.state.location + this.state.year);
     event.preventDefault();
+	const payload = this.state;
+
+	axios.post(baseURL, { payload })
+		.then(res => {
+			console.log(res.status);
+		})
   }
 
 

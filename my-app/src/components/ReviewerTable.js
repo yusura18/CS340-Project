@@ -15,11 +15,29 @@ const baseURL = "http://localhost:6531/reviewer/";
 */
 
 function ReviewerTable(props) {
-    const testArray = [
-		{personID: 0, fName: "test10", lName: "test11", email: "test12"},
-		{personID: 1, fName: "test20", lName: "test21", email: "test22"},
-		{personID: 2, fName: "test30", lName: "test31", email: "test32"}
-	];
+	const [reviewerData, setData] = useState([]);
+
+	useEffect(() => {
+		console.log('fetching reviewer data...');
+		axios.get(baseURL, { crossDomain: true })
+			.then(res => {
+				console.log(res);
+				const load = JSON.parse(res.data.reviewer);
+				console.log(load);
+				console.log("data set");
+				setData(load);
+			})
+			.catch((err) =>{
+				console.log("get request error...")
+				console.log(err);
+			})
+	}, []);
+
+    // const testArray = [
+	// 	{personID: 0, fName: "test10", lName: "test11", email: "test12"},
+	// 	{personID: 1, fName: "test20", lName: "test21", email: "test22"},
+	// 	{personID: 2, fName: "test30", lName: "test31", email: "test32"}
+	// ];
 
     return (
           <div>
@@ -34,7 +52,7 @@ function ReviewerTable(props) {
                       </tr>
                   </thead>
                   <tbody id="tableBody">
-                    {testArray.map((row, index) => {
+                    {reviewerData.map((row, index) => {
 						return(
 							<ReviewerRow personID={row.personID} fName={row.fName} lName={row.lName} email={row.email} />)
 					})}
@@ -65,7 +83,7 @@ function ReviewerRow(props) {
 	}
 
 	return (
-		<tr>
+		<tr key={props.personID}>
 			<td>{props.personID}</td>
 			{editMode ?
 			<td>

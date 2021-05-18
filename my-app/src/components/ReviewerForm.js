@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 
@@ -7,6 +8,9 @@ import Button from 'react-bootstrap/Button';
     lName
     email
 */
+const baseURL = "http://localhost:6531/reviewer/";
+
+
 class ReviewerForm extends React.Component {
 	constructor(props) {
     super(props);
@@ -31,8 +35,15 @@ class ReviewerForm extends React.Component {
 	}
 
   handleSubmit(event) {
-    alert('form was submited with: ' + this.state.sake + this.state.person + this.state.rating + this.state.comment);
+    // alert('form was submited with: ' + this.state.sake + this.state.person + this.state.rating + this.state.comment);
     event.preventDefault();
+	console.log("sending reviewer post");
+	const payload = this.state;
+
+	axios.post(baseURL, { payload })
+		.then(res => {
+			console.log(res.status)
+		})
   }
 
 

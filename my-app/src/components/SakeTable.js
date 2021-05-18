@@ -73,7 +73,7 @@ function SakeTable(props) {
 				<tbody id="tableBody">
 					{sakeData.map((row, index) => {
 						return(
-						<SakeRowTest sakeID={row.sakeID} sakeName={row.sakeName} companyID={row.companyID} region={row.region} sakeStyle={row.sakeStyle} cultivar={row.cultivar} avgRating={row.averageRating}/>)
+						<SakeRowTest sakeID={row.sakeID} sakeName={row.sakeName} companyID={row.companyID} region={row.region} style={row.style} cultivar={row.cultivar} avgRating={row.averageRating}/>)
 					})}
 				</tbody>
 			</Table>
@@ -88,7 +88,7 @@ function SakeRow(props) {
 			<td>{props.sakeName}</td>
 			<td>{props.companyID}</td>
 			<td>{props.region}</td>
-			<td>{props.sakeStyle}</td>
+			<td>{props.style}</td>
 			<td>{props.cultivar}</td>
 			<td>{props.avgRating}</td>
 			<Button variant="warning" style={{margin: 3}}>Edit</Button>
@@ -104,7 +104,7 @@ function SakeRowTest(props) {
 	const [sakeName, setSakeName] = useState(props.sakeName);
 	const [companyID, setCompanyID] = useState(props.companyID);
 	const [region, setRegion] = useState(props.region);
-	const [sakeStyle, setSakeStyle] = useState(props.sakeStyle);
+	const [style, setStyle] = useState(props.style);
 	const [cultivar, setCultivar] = useState(props.cultivar);
 
 	const updateRow = (data) => {
@@ -123,7 +123,7 @@ function SakeRowTest(props) {
 
 	return (
 
-		<tr>
+		<tr key={props.sakeID}>
 			<td>{props.sakeID}</td>
 			{editMode ?
 			<td>
@@ -145,9 +145,9 @@ function SakeRowTest(props) {
 			}
 			{editMode ?
 			<td>
-				<input name='sakeStyle' value={sakeStyle} type='text' onChange={e => setSakeStyle(e.target.value)}/>
+				<input name='style' value={style} type='text' onChange={e => setStyle(e.target.value)}/>
 			</td>
-			: <td>{props.sakeStyle}</td>
+			: <td>{props.style}</td>
 			}
 			{editMode ?
 			<td>

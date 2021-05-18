@@ -9,12 +9,29 @@ const baseURL = "http://localhost:6531/review/";
 
 
 function ReviewTable(props) {
+	const [reviewData, setData] = useState([]);
 
-    const testArray = [
-		{reviewID: 0, sakeID: 1, personID: 1, rating: 1, comment: "test1"},
-		{reviewID: 1, sakeID: 2, personID: 2, rating: 2, comment: null},
-		{reviewID: 2, sakeID: 3, personID: 3, rating: 3, comment: "test3"}
-	];
+	useEffect(() => {
+		console.log('fetching review data...');
+		axios.get(baseURL, { crossDomain: true })
+			.then(res => {
+				console.log(res);
+				const load = JSON.parse(res.data.review);
+				console.log(load);
+				console.log("data set");
+				setData(load);
+			})
+			.catch((err) =>{
+				console.log("get request error...")
+				console.log(err);
+			})
+	}, []);
+
+    // const testArray = [
+	// 	{reviewID: 0, sakeID: 1, personID: 1, rating: 1, comment: "test1"},
+	// 	{reviewID: 1, sakeID: 2, personID: 2, rating: 2, comment: null},
+	// 	{reviewID: 2, sakeID: 3, personID: 3, rating: 3, comment: "test3"}
+	// ];
 
     return (
         <div>
@@ -30,7 +47,7 @@ function ReviewTable(props) {
                     </tr>
                 </thead>
                 <tbody id="tableBody">
-                    {testArray.map((row, index) => {
+                    {reviewData.map((row, index) => {
 						return(
 							<ReviewRow reviewID={row.reviewID} sakeID={row.sakeID} personID={row.personID} rating={row.rating} comment={row.comment} />)
 					})}
@@ -65,7 +82,7 @@ function ReviewRow(props) {
 	}
 
 	return (
-		<tr>
+		<tr key={props.reviewID}>
 			<td>{props.reviewID}</td>
 			{editMode ?
 			<td>
