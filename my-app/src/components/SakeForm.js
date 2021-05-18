@@ -10,6 +10,8 @@ import Button from 'react-bootstrap/Button';
 	cultivar
 	rating
 */
+const baseURL = "http://flip3.engr.oregonstate.edu:XXXX/sake/";
+
 
 class SakeForm extends React.Component {
 	constructor(props) {
@@ -25,22 +27,27 @@ class SakeForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleInputChange (event) {
+	handleInputChange (event) {
 		const target = event.target;
 		const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+    	const name = target.name;
 
 		this.setState({
 			[name]: value
 		});
 	}
 
-  handleSubmit(event) {
-    alert('form was submited with: ' + this.state.sakeName + this.state.companyID + this.state.region + this.state.style + this.state.cultivar);
-    event.preventDefault();
-  }
+  	handleSubmit(event) {
+		event.preventDefault();
 
+		payload = this.state
 
+		axios.post(baseURL, { payload })
+			.then(res => {
+				console.log(res);
+				console.log(res.data);
+			})
+	}
 
 	render() {
 		return (
