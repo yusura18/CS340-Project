@@ -45,9 +45,9 @@ class SakeForm extends React.Component {
 
 		axios.post(baseURL, { payload })
 			.then(res => {
-				console.log(res);
-				console.log(res.data);
+				console.log(res.status);
 			})
+		
 	}
 
 	render() {

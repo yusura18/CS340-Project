@@ -36,6 +36,7 @@ function SakeTable(props) {
 		console.log('fetching sake data...');
 		axios.get(baseURL, { crossDomain: true })
 			.then(res => {
+				console.log(res);
 				const load = JSON.parse(res.data.sake);
 				console.log(load);
 				console.log("data set");
@@ -69,12 +70,11 @@ function SakeTable(props) {
 					<SakeRow sakeID={2} sakeName="Fake Name1" companyID={24} region="Kyushu" sakeStyle="hardcoded" cultivar="hardcoded" avgRating={0.24}/>
 					<SakeRow sakeID={3} sakeName="Fake Name2" companyID={15} region="Hokkaido" sakeStyle="hardcoded" cultivar="hardcoded" avgRating={2.88}/>
 				</tbody> */}
-				<tbody>
-					{sakeData.map((row) => {
-						<SakeRowTest sakeID={row.sakeID} sakeName={row.sakeName} companyID={row.companyID} region={row.region} sakeStyle={row.sakeStyle} cultivar={row.cultivar} avgRating={row.averageRating}/>
+				<tbody id="tableBody">
+					{sakeData.map((row, index) => {
+						return(
+						<SakeRowTest sakeID={row.sakeID} sakeName={row.sakeName} companyID={row.companyID} region={row.region} sakeStyle={row.sakeStyle} cultivar={row.cultivar} avgRating={row.averageRating}/>)
 					})}
-
-
 				</tbody>
 			</Table>
 		</div>
