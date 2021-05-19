@@ -32,21 +32,21 @@ Probably will make a separate component for the row
 function SakeTable(props) {
 	const [sakeData, setData] = useState([]);
 
-	useEffect(() => {
-		console.log('fetching sake data...');
-		axios.get(baseURL, { crossDomain: true })
-			.then(res => {
-				console.log(res);
-				const load = JSON.parse(res.data.sake);
-				console.log(load);
-				console.log("data set");
-				setData(load);
-			})
-			.catch((err) =>{
-				console.log("get request error...")
-				console.log(err);
-			})
-	}, []);
+	// useEffect(() => {
+	// 	console.log('fetching all sake data...');
+	// 	axios.get(baseURL, { crossDomain: true })
+	// 		.then(res => {
+	// 			console.log(res);
+	// 			const load = JSON.parse(res.data.sake);
+	// 			console.log(load);
+	// 			console.log("data set");
+	// 			setData(load);
+	// 		})
+	// 		.catch((err) =>{
+	// 			console.log("get request error...")
+	// 			console.log(err);
+	// 		})
+	// }, []);
 
 	
   	return (
@@ -71,7 +71,7 @@ function SakeTable(props) {
 					<SakeRow sakeID={3} sakeName="Fake Name2" companyID={15} region="Hokkaido" sakeStyle="hardcoded" cultivar="hardcoded" avgRating={2.88}/>
 				</tbody> */}
 				<tbody id="tableBody">
-					{sakeData.map((row, index) => {
+					{props.data.map((row, index) => {
 						return(
 						<SakeRowTest sakeID={row.sakeID} sakeName={row.sakeName} companyID={row.companyID} region={row.region} style={row.style} cultivar={row.cultivar} avgRating={row.averageRating}/>)
 					})}

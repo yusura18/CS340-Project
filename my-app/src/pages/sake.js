@@ -13,7 +13,7 @@ const sake = () => {
             <br />
             <SakeForm/>
             <SearchData/>
-            <SakeTable/> 
+            {/* <SakeTable/>  */}
         </div>  
     );
 };
