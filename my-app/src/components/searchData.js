@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import SakeTable from './SakeTable';
 
-const baseURL = "http://localhost:6531/sake/";
+const baseURL = "http://localhost:6531/";
 
 
 class searchData extends React.Component {
@@ -14,7 +14,8 @@ class searchData extends React.Component {
         this.state = {
             attribute: 'sakeName',
             query: '',
-            resData: []
+            resData: [],
+            companyData: [],
             };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,7 +25,7 @@ class searchData extends React.Component {
 
     getAllSake = () => {
         console.log('fetching all sake data...');
-		axios.get(baseURL, { crossDomain: true })
+		axios.get(`${baseURL}sake/`, { crossDomain: true })
 			.then(res => {
 				const resJSON = JSON.parse(res.data.sake);
 				console.log(resJSON);
@@ -32,12 +33,24 @@ class searchData extends React.Component {
 				this.setState({resData: resJSON});
 			})
 			.catch((err) =>{
-				console.log("get request error...")
+				console.log("get request error in getAllSake...")
 				console.log(err);
 			})
     }
     componentDidMount() {
         this.getAllSake();
+
+        // Get company info for dropdown
+        axios.get(`${baseURL}company/dropdown`, { crossDomain: true })
+			.then(res => {
+				const coJSON = JSON.parse(res.data.company);
+				console.log(coJSON);
+                this.setState({companyData: coJSON})
+			})
+			.catch((err) =>{
+				console.log("error while fetching companies...")
+				console.log(err);
+			})
     }
 
     handleInputChange = (event) => {
@@ -59,7 +72,7 @@ class searchData extends React.Component {
             alert("Empty query");
         } else {
             console.log(`fetching ${this.state.attribute} filtered sake data...`);
-            let reqURL = `${baseURL}?col=${this.state.attribute}&q=${this.state.query}`;
+            let reqURL = `${baseURL}sake/?col=${this.state.attribute}&q=${this.state.query}`;
             axios.get(reqURL, { crossDomain: true })
                 .then(res => {
                     const resJSON = JSON.parse(res.data.sake);
@@ -101,9 +114,21 @@ class searchData extends React.Component {
                     <label>
                         Enter query:
                         <div>
-                            {this.state.attribute === 'companyID'
+                            {/* {this.state.attribute === 'companyID'
                                 ? <input type='number' value={this.state.query} name='query' onChange={this.handleInputChange}/>
                                 : <input type='text' value={this.state.query} name='query' onChange={this.handleInputChange}/>
+                            } */}
+                            {this.state.attribute === 'companyID' ?
+                                <select value={this.state.query} name='query' onChange={this.handleInputChange}>
+                                    {this.state.companyData.map((co, index) => {
+                                        return(
+                                            <option value={co.companyID}>{co.companyID}, {co.companyName}</option>
+                                        )
+                                    })}
+                                    <input type='number' value={this.state.query} name='query' onChange={this.handleInputChange}/>
+                                </select>
+                                : 
+                                <input type='text' value={this.state.query} name='query' onChange={this.handleInputChange}/>
                             }
                         </div>
                     </label>

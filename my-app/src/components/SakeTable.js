@@ -5,49 +5,9 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
-const baseURL = "http://localhost:6531/sake/";
-
-/* props will have format:
-{entity: entityName, columns: [list of columns]}
-
-Probably will make a separate component for the row
-*/
-// function getData() {
-// 	console.log('fetching sake data...');
-// 	const data = null;
-// 	axios.get(baseURL, { crossDomain: true })
-// 		.then(res => {
-// 			const load = res.data.sake
-// 			console.log(load);
-// 			data = load;
-// 			console.log("data set");
-// 		})
-// 		.catch((err) =>{
-// 			console.log("get request error...")
-// 			console.log(err);
-// 		})
-// 	return data;
-// }
+const baseURL = "http://localhost:6531/";
 
 function SakeTable(props) {
-	const [sakeData, setData] = useState([]);
-
-	// useEffect(() => {
-	// 	console.log('fetching all sake data...');
-	// 	axios.get(baseURL, { crossDomain: true })
-	// 		.then(res => {
-	// 			console.log(res);
-	// 			const load = JSON.parse(res.data.sake);
-	// 			console.log(load);
-	// 			console.log("data set");
-	// 			setData(load);
-	// 		})
-	// 		.catch((err) =>{
-	// 			console.log("get request error...")
-	// 			console.log(err);
-	// 		})
-	// }, []);
-
 	
   	return (
 		<div>
@@ -64,16 +24,10 @@ function SakeTable(props) {
 						<th>avgRating</th>
 					</tr>
 				</thead>
-				{/* <tbody id="tableBody">
-					<SakeRowTest sakeID={1} sakeName="Fake Name" companyID={15} region="Nara" sakeStyle="Couldn't Tell You" cultivar="Same" avgRating={2.75}/>
-					<SakeRow sakeID={1} sakeName="Fake Name" companyID={15} region="Nara" sakeStyle="Couldn't Tell You" cultivar="Same" avgRating={2.75}/>
-					<SakeRow sakeID={2} sakeName="Fake Name1" companyID={24} region="Kyushu" sakeStyle="hardcoded" cultivar="hardcoded" avgRating={0.24}/>
-					<SakeRow sakeID={3} sakeName="Fake Name2" companyID={15} region="Hokkaido" sakeStyle="hardcoded" cultivar="hardcoded" avgRating={2.88}/>
-				</tbody> */}
 				<tbody id="tableBody">
 					{props.data.map((row, index) => {
 						return(
-						<SakeRowTest sakeID={row.sakeID} sakeName={row.sakeName} companyID={row.companyID} region={row.region} style={row.style} cultivar={row.cultivar} avgRating={row.averageRating}/>)
+						<SakeRow sakeID={row.sakeID} sakeName={row.sakeName} companyID={row.companyID} region={row.region} style={row.style} cultivar={row.cultivar} avgRating={row.averageRating}/>)
 					})}
 				</tbody>
 			</Table>
@@ -81,25 +35,8 @@ function SakeTable(props) {
 	);
 }
 
+
 function SakeRow(props) {
-	return (
-		<tr>
-			<td>{props.sakeID}</td>
-			<td>{props.sakeName}</td>
-			<td>{props.companyID}</td>
-			<td>{props.region}</td>
-			<td>{props.style}</td>
-			<td>{props.cultivar}</td>
-			<td>{props.avgRating}</td>
-			<Button variant="warning" style={{margin: 3}}>Edit</Button>
-			<Button variant="danger" style={{margin: 3}}>Delete</Button>
-		</tr>
-	);
-
-}
-
-// Test component to test row editing
-function SakeRowTest(props) {
 	const [editMode, toggleEdit] = useState(false);
 	const [sakeName, setSakeName] = useState(props.sakeName);
 	const [companyID, setCompanyID] = useState(props.companyID);
@@ -114,7 +51,7 @@ function SakeRowTest(props) {
 	}
 	
 	const deleteRow = () => {
-		axios.delete(`${baseURL}:${props.sakeID}`)
+		axios.delete(`${baseURL}sake/:${props.sakeID}`)
 		.then(res => {
 			console.log(res);
 			console.log(res.data);
