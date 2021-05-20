@@ -44,6 +44,9 @@ class ReviewerForm extends React.Component {
 		.then(res => {
 			console.log(res.status)
 		})
+		.finally(() =>{
+			window.location.reload();
+		})
   }
 
 

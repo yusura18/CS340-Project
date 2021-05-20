@@ -11,7 +11,7 @@ import axios from 'axios';
 	cultivar
 	rating
 */
-const baseURL = "http://localhost:6531/sake/";
+const baseURL = "http://localhost:6531/";
 
 
 class SakeForm extends React.Component {
@@ -43,9 +43,12 @@ class SakeForm extends React.Component {
 		console.log("sending sake post");
 		const payload = this.state;
 
-		axios.post(baseURL, { payload })
+		axios.post(baseURL + "sake/", { payload })
 			.then(res => {
 				console.log(res.status);
+			})
+			.finally(() =>{
+				window.location.reload();
 			})
 		
 	}
