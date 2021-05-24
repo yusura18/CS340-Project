@@ -39,17 +39,17 @@ function ReviewTable(props) {
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th>reviewID</th>
-                        <th>sakeID</th>
-                        <th>personID</th>
-                        <th>rating</th>
-                        <th>comment</th>
+                        <th>Review ID</th>
+                        <th>Sake Name</th>
+                        <th>Reviewer Name</th>
+                        <th>Rating</th>
+                        <th>Comment</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
                     {reviewData.map((row, index) => {
 						return(
-							<ReviewRow reviewID={row.reviewID} sakeID={row.sakeID} personID={row.personID} rating={row.rating} comment={row.comment} />)
+							<ReviewRow reviewID={row.reviewID} sakeID={row.sakeName} personID={row.reviewerName} rating={row.rating} comment={row.comment} />)
 					})}
                     {/* <ReviewRow reviewID={1} sakeID={5} personID={15} rating={2} comment=""/>
                     <ReviewRow reviewID={2} sakeID={83} personID={24} rating={0} comment="Just awful"/>
@@ -62,8 +62,8 @@ function ReviewTable(props) {
 
 function ReviewRow(props) {
 	const [editMode, toggleEdit] = useState(false);
-	const [sakeID, setSakeID] = useState(props.sakeID);
-	const [personID, setPersonID] = useState(props.personID);
+	const [sakeID, setSakeID] = useState(props.sakeName);
+	const [personID, setPersonID] = useState(props.reviewerName);
 	const [rating, setRating] = useState(props.rating);
 	const [comment, setComment] = useState(props.comment);
 

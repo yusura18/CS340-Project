@@ -41,10 +41,10 @@ function CompanyTable(props) {
 			<Table striped bordered hover>
 				<thead>
 					<tr>
-						<th>companyID</th>
-						<th>companyName</th>
-						<th>location</th>
-						<th>year</th>
+						<th>Company ID</th>
+						<th>Company Name</th>
+						<th>Location</th>
+						<th>Year Founded</th>
 					</tr>
 				</thead>
 				<tbody id="tableBody">

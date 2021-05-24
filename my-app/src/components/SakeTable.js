@@ -15,19 +15,19 @@ function SakeTable(props) {
 			<Table striped bordered hover>
 				<thead>
 					<tr>
-						<th>sakeID</th>
-						<th>sakeName</th>
-						<th>companyID</th>
-						<th>region</th>
-						<th>style</th>
-						<th>cultivar</th>
-						<th>avgRating</th>
+						<th>Sake ID</th>
+						<th>Sake Name</th>
+						<th>Company</th>
+						<th>Region</th>
+						<th>Style</th>
+						<th>Cultivar</th>
+						<th>Average Rating</th>
 					</tr>
 				</thead>
 				<tbody id="tableBody">
 					{props.data.map((row, index) => {
 						return(
-						<SakeRow sakeID={row.sakeID} sakeName={row.sakeName} companyID={row.companyID} region={row.region} style={row.style} cultivar={row.cultivar} avgRating={row.averageRating}/>)
+						<SakeRow sakeID={row.sakeID} sakeName={row.sakeName} companyID={row.companyName} region={row.region} style={row.style} cultivar={row.cultivar} avgRating={row.averageRating}/>)
 					})}
 				</tbody>
 			</Table>
@@ -39,7 +39,7 @@ function SakeTable(props) {
 function SakeRow(props) {
 	const [editMode, toggleEdit] = useState(false);
 	const [sakeName, setSakeName] = useState(props.sakeName);
-	const [companyID, setCompanyID] = useState(props.companyID);
+	const [companyID, setCompanyID] = useState(props.companyName);
 	const [region, setRegion] = useState(props.region);
 	const [style, setStyle] = useState(props.style);
 	const [cultivar, setCultivar] = useState(props.cultivar);

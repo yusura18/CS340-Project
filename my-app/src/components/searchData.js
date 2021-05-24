@@ -15,7 +15,7 @@ class searchData extends React.Component {
             attribute: 'sakeName',
             query: '',
             resData: [],
-            companyData: [],
+            // companyData: [],
             };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,17 +40,17 @@ class searchData extends React.Component {
     componentDidMount() {
         this.getAllSake();
 
-        // Get company info for dropdown
-        axios.get(`${baseURL}company/dropdown`, { crossDomain: true })
-			.then(res => {
-				const coJSON = JSON.parse(res.data.company);
-				console.log(coJSON);
-                this.setState({companyData: coJSON})
-			})
-			.catch((err) =>{
-				console.log("error while fetching companies...")
-				console.log(err);
-			})
+        // // Get company info for dropdown
+        // axios.get(`${baseURL}company/dropdown`, { crossDomain: true })
+		// 	.then(res => {
+		// 		const coJSON = JSON.parse(res.data.company);
+		// 		console.log(coJSON);
+        //         this.setState({companyData: coJSON})
+		// 	})
+		// 	.catch((err) =>{
+		// 		console.log("error while fetching companies...")
+		// 		console.log(err);
+		// 	})
     }
 
     handleInputChange = (event) => {
@@ -91,7 +91,9 @@ class searchData extends React.Component {
     handleClear(event) {
         event.preventDefault();
         console.log("clearing filters");
+        this.state.query = "";
         this.getAllSake();
+
     }
     
     render() {
@@ -104,7 +106,7 @@ class searchData extends React.Component {
                         <div>
                             <select value={this.state.attribute} name='attribute' onChange={this.handleInputChange}>
                                 <option value='sakeName'>sakeName</option>
-                                <option value='companyID'>companyID</option>
+                                <option value='companyName'>company</option>
                                 <option value='region'>region</option>
                                 <option value='style'>style</option>
                                 <option value='cultivar'>cultivar</option>
@@ -118,7 +120,8 @@ class searchData extends React.Component {
                                 ? <input type='number' value={this.state.query} name='query' onChange={this.handleInputChange}/>
                                 : <input type='text' value={this.state.query} name='query' onChange={this.handleInputChange}/>
                             } */}
-                            {this.state.attribute === 'companyID' ?
+                            <input type='text' value={this.state.query} name='query' onChange={this.handleInputChange}/>
+                            {/* {this.state.attribute === 'companyID' ?
                                 <select value={this.state.query} name='query' onChange={this.handleInputChange}>
                                     {this.state.companyData.map((co, index) => {
                                         return(
@@ -129,7 +132,7 @@ class searchData extends React.Component {
                                 </select>
                                 : 
                                 <input type='text' value={this.state.query} name='query' onChange={this.handleInputChange}/>
-                            }
+                            } */}
                         </div>
                     </label>
                     

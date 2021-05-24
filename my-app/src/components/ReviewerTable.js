@@ -45,10 +45,10 @@ function ReviewerTable(props) {
               <Table striped bordered hover>
                   <thead>
                       <tr>
-                          <th>personID</th>
-                          <th>fName</th>
-                          <th>lName</th>
-                          <th>email</th>
+                          <th>Person ID</th>
+                          <th>First Name</th>
+                          <th>Last Name</th>
+                          <th>Email</th>
                       </tr>
                   </thead>
                   <tbody id="tableBody">
