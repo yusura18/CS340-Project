@@ -51,11 +51,17 @@ function SakeRow(props) {
 	}
 	
 	const deleteRow = () => {
-		axios.delete(`${baseURL}sake/:${props.sakeID}`)
-		.then(res => {
-			console.log(res);
-			console.log(res.data);
-      	})
+		axios.delete(`${baseURL}sake/`, {data: {sakeID: props.sakeID}})
+			.then(res => {
+				console.log(res);
+			})
+			.catch((err) =>{
+				console.log("error while deleting sake row...")
+				console.log(err);
+			})
+			.finally(() => {
+				window.location.reload();
+			})
 	}
 
 	return (

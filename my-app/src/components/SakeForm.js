@@ -47,6 +47,10 @@ class SakeForm extends React.Component {
 			.then(res => {
 				console.log(res.status);
 			})
+			.catch((err) =>{
+        		console.log("error while posting sake...")
+        		console.log(err);
+        	})
 			.finally(() =>{
 				window.location.reload();
 			})

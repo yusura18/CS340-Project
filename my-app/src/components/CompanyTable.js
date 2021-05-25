@@ -5,7 +5,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
-const baseURL = "http://localhost:6531/company/";
+const baseURL = "http://localhost:6531/";
 
 
 
@@ -14,7 +14,7 @@ function CompanyTable(props) {
 
 	useEffect(() => {
 		console.log('fetching company data...');
-		axios.get(baseURL, { crossDomain: true })
+		axios.get(`${baseURL}company/`, { crossDomain: true })
 			.then(res => {
 				console.log(res);
 				const load = JSON.parse(res.data.company);
@@ -72,11 +72,17 @@ function CompanyRow(props) {
 	}
 	
 	const deleteRow = () => {
-		axios.delete(`${baseURL}:${props.companyID}`)
-		.then(res => {
-			console.log(res);
-			console.log(res.data);
-      	})
+		axios.delete(`${baseURL}company/`, {data: {companyID: props.companyID}})
+			.then(res => {
+				console.log(res);
+			})
+			.catch((err) =>{
+				console.log("error while deleting company row...")
+				console.log(err);
+			})
+			.finally(() => {
+				window.location.reload();
+			})
 	}
 
 	return (
