@@ -2,7 +2,7 @@ import React from 'react';
 import ReviewerTable from '../components/ReviewerTable';
 import ReviewerForm from '../components/ReviewerForm';
 
-const reviewer = () => {
+const Reviewer = () => {
     return (
         <div>
              <br />
@@ -16,4 +16,4 @@ const reviewer = () => {
     );
 };
 
-export default reviewer;
+export default Reviewer;

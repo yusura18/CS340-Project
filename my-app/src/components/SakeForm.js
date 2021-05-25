@@ -19,7 +19,7 @@ class SakeForm extends React.Component {
 		super(props);
 		this.state = {
 			sakeName: '',
-			companyID: '',
+			companyID: this.props.companies[0].companyID,
 			region: '',
 			style: '',
 			cultivar: '',
@@ -64,7 +64,15 @@ class SakeForm extends React.Component {
 					</label>
 					<label>
 						Company ID:
-						<input type="number" name="companyID" value={this.state.companyID} onChange={this.handleInputChange}/>
+						<select value={this.state.companyID} name='companyID' onChange={this.handleInputChange}>
+							{this.props.companies.map((co, index) => {
+								return(
+									<option value={co.companyID}>{co.companyID}, {co.companyName}</option>
+								)
+							})}
+							<input type='number' value={this.state.query} name='query' onChange={this.handleInputChange}/>
+						</select>
+                        
 					</label>
 					<label>
 						Region:

@@ -3,7 +3,7 @@ import CompanyTable from '../components/CompanyTable';
 import CompanyForm from '../components/CompanyForm';
 
 
-const company = () => {
+const Company = () => {
     return (
         <div>
              <br />
@@ -17,4 +17,4 @@ const company = () => {
     );
 };
 
-export default company;
+export default Company;

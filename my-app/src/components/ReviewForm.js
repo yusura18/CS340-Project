@@ -10,14 +10,14 @@ import Button from 'react-bootstrap/Button';
     comment 
 
 */
-const baseURL = "http://localhost:6531/review/";
+const baseURL = "http://localhost:6531/";
 
 class ReviewForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			sakeID: '',
-			personID: '',
+			sakeID: this.props.sakeData[0].sakeID,
+			personID: this.props.reviewerData[0].personID,
 			rating: 0,
 			comment: ''
 			};
@@ -34,20 +34,28 @@ class ReviewForm extends React.Component {
 			[name]: value
 		});
 	}
-
+	
   	handleSubmit(event) {
-		// alert('form was submited with: ' + this.state.sakeID + this.state.personID + this.state.rating + this.state.comment);
 		event.preventDefault();
+		
+		//alert('form was submited with: ' + this.state.sakeID +", "+ this.state.personID + ", " + this.state.rating + ", " + this.state.comment);
+
 		console.log("sending review post");
 		const payload = this.state;
-
-		axios.post(baseURL, { payload })
+		console.log("review payload is " + JSON.stringify(this.state));
+		axios.post(`${baseURL}review/`, { payload })
 			.then(res => {
-				console.log(res.status);
+				console.log(JSON.stringify(res.status));
 			})
+			.catch((err) =>{
+        		console.log("error while submitting review form...")
+        		console.log(err);
+        	})
 			.finally(() =>{
+				console.log(this.state)
 				window.location.reload();
 			})
+		
   	}
 
 	render() {
@@ -56,12 +64,26 @@ class ReviewForm extends React.Component {
 				<h1>Add a Review</h1>
 				<form>
 					<label>
-						Sake ID:
-						<input type="number" name="sakeID" value={this.state.sakeID} onChange={this.handleInputChange}/>
+						Sake:
+						<select value={this.state.sakeID} name='sakeID' onChange={this.handleInputChange}>
+							{this.props.sakeData.map((sake, index) => {
+								return(
+									<option value={sake.sakeID}>{sake.sakeID}, {sake.sakeName}</option>
+								)
+							})}
+							<input type='number' value={this.state.query} name='query' onChange={this.handleInputChange}/>
+						</select>
 					</label>
 					<label>
 						Reviewer ID:
-						<input type="number" name="personID" value={this.state.personID} onChange={this.handleInputChange}/>
+						<select value={this.state.personID} name='personID' onChange={this.handleInputChange}>
+							{this.props.reviewerData.map((p, index) => {
+								return(
+									<option value={p.personID}>{p.personID}, {p.reviewerName}</option>
+								)
+							})}
+							<input type='number' value={this.state.query} name='query' onChange={this.handleInputChange}/>
+						</select>
 					</label>
 					<label>
                         Rating:
