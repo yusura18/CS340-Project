@@ -26,6 +26,7 @@ class SakeForm extends React.Component {
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		console.log(this.props.companies)
   	}
 
 	handleInputChange (event) {

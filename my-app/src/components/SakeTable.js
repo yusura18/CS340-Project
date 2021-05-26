@@ -4,6 +4,7 @@ import React, {
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
+import Sake from '../pages/sake';
 
 const baseURL = "http://localhost:6531/";
 
@@ -35,20 +36,58 @@ function SakeTable(props) {
 	);
 }
 
-
-function SakeRow(props) {
+const SakeRow = (props) => {
 	const [editMode, toggleEdit] = useState(false);
 	const [sakeName, setSakeName] = useState(props.sakeName);
 	const [companyID, setCompanyID] = useState(props.companyName);
 	const [region, setRegion] = useState(props.region);
 	const [style, setStyle] = useState(props.style);
 	const [cultivar, setCultivar] = useState(props.cultivar);
+	const [companyData, setCompanyData] = useState([]);
 
-	const updateRow = (data) => {
-		toggleEdit(!editMode);
+	useEffect(() => {
+		// Get company info for dropdown for individual sake rows
+		axios.get(`${baseURL}company/dropdown`, { crossDomain: true })
+		.then(res => {
+			const coJSON = JSON.parse(res.data.company);
+			const newState = [{companyID: null, companyName: "[Unknown]"}].concat(coJSON);
+			setCompanyData(newState);
+		})
+		.catch((err) =>{
+			console.log("error while fetching companies...")
+			console.log(err);
+		})
+	}, []);
+
+	const updateRow = () => {
 		// TODO: Send UPDATE query to database.  Refresh row's data
+		toggleEdit(!editMode);
+		
+		// Not sure if this is the right way to go about this. I don't know
+		// when/where updateRow should be called....
 
-	}
+		const data = {
+			sakeName: props.sakeName,
+			companyID: props.companyID,
+			region: props.region,
+			style: props.style,
+			cultivar: props.cultivar,
+			sakeID: props.sakeID,
+		}
+
+		axios.put(`${baseURL}sake/`, { data })
+			.then(res => {
+				console.log(res);
+			})
+			.catch((err) => {
+				console.log("error while updating sake row...");
+				console.log(err);
+			})
+			.finally(() => {
+
+				window.location.reload();
+			})
+	}	
 	
 	const deleteRow = () => {
 		axios.delete(`${baseURL}sake/`, {data: {sakeID: props.sakeID}})
@@ -76,7 +115,14 @@ function SakeRow(props) {
 			}
 			{editMode ?
 			<td>
-				<input name='companyID' value={companyID} type='number' onChange={e => setCompanyID(e.target.value)}/>
+				<select value={companyID} name='companyID'>
+					{companyData.map((co, index) => {
+						return (
+							<option value={co.companyID}>{co.companyID}, {co.companyName}</option>
+						)
+					})}
+					<input name='companyID' type='number' value={companyID} onChange={e => setCompanyID(e.target.value)}/>
+				</select>
 			</td>
 			: <td>{props.companyID}</td>
 			}

@@ -5,7 +5,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
-const baseURL = "http://localhost:6531/review/";
+const baseURL = "http://localhost:6531/";
 
 
 function ReviewTable(props) {
@@ -13,7 +13,7 @@ function ReviewTable(props) {
 
 	useEffect(() => {
 		console.log('fetching review data...');
-		axios.get(baseURL, { crossDomain: true })
+		axios.get(`${baseURL}review/`, { crossDomain: true })
 			.then(res => {
 				console.log(res);
 				const load = JSON.parse(res.data.review);
@@ -74,11 +74,17 @@ function ReviewRow(props) {
 	}
 	
 	const deleteRow = () => {
-		axios.delete(`${baseURL}:${props.reviewID}`)
-		.then(res => {
-			console.log(res);
-			console.log(res.data);
-      	})
+		axios.delete(`${baseURL}review/`, {data: {reviewID: props.reviewID}})
+			.then(res => {
+				console.log(res);
+			})
+			.catch((err) =>{
+				console.log("error while deleting reviewer row...")
+				console.log(err);
+			})
+			.finally(() => {
+				window.location.reload();
+			})
 	}
 
 	return (
