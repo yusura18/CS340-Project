@@ -116,23 +116,7 @@ class searchData extends React.Component {
                     <label>
                         Enter query:
                         <div>
-                            {/* {this.state.attribute === 'companyID'
-                                ? <input type='number' value={this.state.query} name='query' onChange={this.handleInputChange}/>
-                                : <input type='text' value={this.state.query} name='query' onChange={this.handleInputChange}/>
-                            } */}
                             <input type='text' value={this.state.query} name='query' onChange={this.handleInputChange}/>
-                            {/* {this.state.attribute === 'companyID' ?
-                                <select value={this.state.query} name='query' onChange={this.handleInputChange}>
-                                    {this.state.companyData.map((co, index) => {
-                                        return(
-                                            <option value={co.companyID}>{co.companyID}, {co.companyName}</option>
-                                        )
-                                    })}
-                                    <input type='number' value={this.state.query} name='query' onChange={this.handleInputChange}/>
-                                </select>
-                                : 
-                                <input type='text' value={this.state.query} name='query' onChange={this.handleInputChange}/>
-                            } */}
                         </div>
                     </label>
                     
@@ -140,7 +124,7 @@ class searchData extends React.Component {
                     <input type="submit" value="Clear Filter" onClick={this.handleClear}/>
                 </div>
                 <div>
-                    <SakeTable data={this.state.resData}></SakeTable>
+                    <SakeTable data={this.state.resData} companies={this.props.companies}></SakeTable>
                 </div>
             </section>
         );

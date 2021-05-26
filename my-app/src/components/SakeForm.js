@@ -75,9 +75,7 @@ class SakeForm extends React.Component {
 									<option value={co.companyID}>{co.companyID}, {co.companyName}</option>
 								)
 							})}
-							<input type='number' value={this.state.query} name='query' onChange={this.handleInputChange}/>
 						</select>
-                        
 					</label>
 					<label>
 						Region:

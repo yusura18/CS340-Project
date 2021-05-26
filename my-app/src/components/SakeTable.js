@@ -28,7 +28,7 @@ function SakeTable(props) {
 				<tbody id="tableBody">
 					{props.data.map((row, index) => {
 						return(
-						<SakeRow sakeID={row.sakeID} sakeName={row.sakeName} companyID={row.companyName} region={row.region} style={row.style} cultivar={row.cultivar} avgRating={row.averageRating}/>)
+						<SakeRow key={row.sakeID} sakeID={row.sakeID} sakeName={row.sakeName} companyID={row.companyID} companyName={row.companyName} region={row.region} style={row.style} cultivar={row.cultivar} avgRating={row.averageRating} companies={props.companies}/>)
 					})}
 				</tbody>
 			</Table>
@@ -39,54 +39,45 @@ function SakeTable(props) {
 const SakeRow = (props) => {
 	const [editMode, toggleEdit] = useState(false);
 	const [sakeName, setSakeName] = useState(props.sakeName);
-	const [companyID, setCompanyID] = useState(props.companyName);
+	const [companyID, setCompanyID] = useState(props.companyID);
 	const [region, setRegion] = useState(props.region);
 	const [style, setStyle] = useState(props.style);
 	const [cultivar, setCultivar] = useState(props.cultivar);
-	const [companyData, setCompanyData] = useState([]);
 
-	useEffect(() => {
-		// Get company info for dropdown for individual sake rows
-		axios.get(`${baseURL}company/dropdown`, { crossDomain: true })
-		.then(res => {
-			const coJSON = JSON.parse(res.data.company);
-			const newState = [{companyID: null, companyName: "[Unknown]"}].concat(coJSON);
-			setCompanyData(newState);
-		})
-		.catch((err) =>{
-			console.log("error while fetching companies...")
-			console.log(err);
-		})
-	}, []);
-
-	const updateRow = () => {
-		// TODO: Send UPDATE query to database.  Refresh row's data
-		toggleEdit(!editMode);
-		
-		// Not sure if this is the right way to go about this. I don't know
-		// when/where updateRow should be called....
-
+	const updateRow = (e) => {
+		e.preventDefault();
 		const data = {
-			sakeName: props.sakeName,
-			companyID: props.companyID,
-			region: props.region,
-			style: props.style,
-			cultivar: props.cultivar,
+			sakeName: sakeName,
+			companyID: companyID,
+			region: region,
+			style: style,
+			cultivar: cultivar,
 			sakeID: props.sakeID,
 		}
 
-		axios.put(`${baseURL}sake/`, { data })
-			.then(res => {
-				console.log(res);
-			})
-			.catch((err) => {
-				console.log("error while updating sake row...");
-				console.log(err);
-			})
-			.finally(() => {
+		// Handle null company
+		if (data.companyID === ", [Unknown]"){
+			data.companyID = null;
+		}
 
-				window.location.reload();
-			})
+		// Only submit request if data changed
+		if (sakeName != props.sakeName || companyID != props.companyID || region != props.region || style != props.style || cultivar != props.cultivar){
+			axios.put(`${baseURL}sake/`, { data })
+				.then(res => {
+					console.log(res);
+				})
+				.catch((err) => {
+					console.log("error while updating sake row...");
+					alert("There was an error with the submission");
+					console.log(err);
+				})
+				.finally(() => {
+					toggleEdit(!editMode);
+					window.location.reload();
+				})
+		} else {
+			toggleEdit(!editMode);
+		}
 	}	
 	
 	const deleteRow = () => {
@@ -95,7 +86,7 @@ const SakeRow = (props) => {
 				console.log(res);
 			})
 			.catch((err) =>{
-				console.log("error while deleting sake row...")
+				console.log("error while deleting sake row...");
 				console.log(err);
 			})
 			.finally(() => {
@@ -104,8 +95,7 @@ const SakeRow = (props) => {
 	}
 
 	return (
-
-		<tr key={props.sakeID}>
+		<tr>
 			<td>{props.sakeID}</td>
 			{editMode ?
 			<td>
@@ -114,17 +104,18 @@ const SakeRow = (props) => {
 			: <td>{props.sakeName}</td>
 			}
 			{editMode ?
+
 			<td>
-				<select value={companyID} name='companyID'>
-					{companyData.map((co, index) => {
+				<select value={companyID} name='companyID' onChange={e => setCompanyID(e.target.value)}>
+					{props.companies.map((co, index) => {
 						return (
 							<option value={co.companyID}>{co.companyID}, {co.companyName}</option>
 						)
 					})}
-					<input name='companyID' type='number' value={companyID} onChange={e => setCompanyID(e.target.value)}/>
 				</select>
 			</td>
-			: <td>{props.companyID}</td>
+
+			: <td>{props.companyName}</td>
 			}
 			{editMode ?
 			<td>
@@ -147,7 +138,7 @@ const SakeRow = (props) => {
 			<td>{props.avgRating}</td>
 			<td>
 			{editMode 
-			? <Button variant="success" style={{margin: 3}} onClick={() => toggleEdit(!editMode)}>Confirm</Button>
+			? <Button variant="success" style={{margin: 3}} onClick={(e) => updateRow(e)}>Confirm</Button>
 			: <Button variant="warning" style={{margin: 3}} onClick={() => toggleEdit(!editMode)}>Edit</Button>
 			}
 			<Button variant="danger" style={{margin: 3}} onClick={() => deleteRow()}>Delete</Button>

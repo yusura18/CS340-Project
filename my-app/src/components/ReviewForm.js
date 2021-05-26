@@ -71,7 +71,6 @@ class ReviewForm extends React.Component {
 									<option value={sake.sakeID}>{sake.sakeID}, {sake.sakeName}</option>
 								)
 							})}
-							<input type='number' value={this.state.query} name='query' onChange={this.handleInputChange}/>
 						</select>
 					</label>
 					<label>
@@ -82,7 +81,6 @@ class ReviewForm extends React.Component {
 									<option value={p.personID}>{p.personID}, {p.reviewerName}</option>
 								)
 							})}
-							<input type='number' value={this.state.query} name='query' onChange={this.handleInputChange}/>
 						</select>
 					</label>
 					<label>

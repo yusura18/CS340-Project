@@ -39,8 +39,13 @@ const Sake = () => {
                     'Loading Form Data'
                 )
             }
-            <SearchData/>
-            {/* <SakeTable/>  */}
+            {
+                coData.length ? (
+                <SearchData companies={coData}/>
+                ) : (
+                    'Loading Table Data'
+                )
+            }
         </div>  
     );
 };
