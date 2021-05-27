@@ -37,8 +37,6 @@ class ReviewForm extends React.Component {
 	
   	handleSubmit(event) {
 		event.preventDefault();
-		
-		//alert('form was submited with: ' + this.state.sakeID +", "+ this.state.personID + ", " + this.state.rating + ", " + this.state.comment);
 
 		console.log("sending review post");
 		const payload = this.state;
