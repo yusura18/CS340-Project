@@ -58,7 +58,13 @@ const Review = () => {
                     'Loading Form Data'
                 )
             }
-            <ReviewTable/>  
+            {
+                sakeData.length && reviewerData.length ? (
+                <ReviewTable sakeData={sakeData} reviewerData={reviewerData}/>
+                ) : (
+                    'Loading Table Data'
+                )
+            }
         </div>  
     );
 };
