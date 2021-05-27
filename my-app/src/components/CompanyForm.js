@@ -38,16 +38,23 @@ class CompanyForm extends React.Component {
     event.preventDefault();
 	const payload = this.state;
 
-	axios.post(baseURL, { payload })
+	// Validate input fields
+	if (this.state.companyName == "" || this.state.location == "") {
+		if (this.state.companyName == "") {
+			alert("Please enter a Company name.");
+		} else {
+			alert("Please enter a location.");
+		}
+	} else {
+		axios.post(baseURL, { payload })
 		.then(res => {
 			console.log(res.status);
 		})
 		.finally(() =>{
 			window.location.reload();
 		})
+	}
   }
-
-
 
 	render() {
 		return (

@@ -44,7 +44,8 @@ class SakeForm extends React.Component {
 		event.preventDefault();
 		console.log("sending sake post");
 		const payload = this.state;
-
+		
+		// Validate input fields
 		if (this.state.sakeName == "" || this.state.region == "" || this.state.style == ""){
 			if (this.state.sakeName == "") {
 				alert("Please enter a Sake name.")
@@ -66,6 +67,7 @@ class SakeForm extends React.Component {
 				window.location.reload();
 			})
 		}
+
 	}
 
 	render() {

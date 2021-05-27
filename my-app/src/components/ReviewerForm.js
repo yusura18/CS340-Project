@@ -40,16 +40,25 @@ class ReviewerForm extends React.Component {
 	console.log("sending reviewer post");
 	const payload = this.state;
 
-	axios.post(baseURL, { payload })
+	// Validate input fields
+	if (this.state.fName == "" || this.state.lName == "" || this.state.email == "") {
+		if (this.state.fName == "") {
+			alert("Please enter first name.");
+		} else if (this.state.lName == "") {
+			alert("Please enter last name.");
+		} else {
+			alert("Please enter email.");
+		}
+	} else {
+		axios.post(baseURL, { payload })
 		.then(res => {
 			console.log(res.status)
 		})
 		.finally(() =>{
 			window.location.reload();
 		})
+	}
   }
-
-
 
 	render() {
 		return (
