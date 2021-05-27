@@ -24,18 +24,19 @@ class SakeForm extends React.Component {
 			style: '',
 			cultivar: '',
 		};
+
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		console.log(this.props.companies)
   	}
-
+	
 	handleInputChange (event) {
 		const target = event.target;
 		const value = target.type === 'checkbox' ? target.checked : target.value;
     	const name = target.name;
 
 		this.setState({
-			[name]: value
+			[name]: value,
 		});
 	}
 
@@ -44,18 +45,27 @@ class SakeForm extends React.Component {
 		console.log("sending sake post");
 		const payload = this.state;
 
-		axios.post(baseURL + "sake/", { payload })
+		if (this.state.sakeName == "" || this.state.region == "" || this.state.style == ""){
+			if (this.state.sakeName == "") {
+				alert("Please enter a Sake name.")
+			} else if (this.state.region == "") {
+				alert("Please enter a region.")
+			} else {
+				alert("Please enter a style.")
+			}
+		} else {
+			axios.post(baseURL + "sake/", { payload })
 			.then(res => {
 				console.log(res.status);
 			})
 			.catch((err) =>{
-        		console.log("error while posting sake...")
-        		console.log(err);
-        	})
+				console.log("error while posting sake...")
+				console.log(err);
+			})
 			.finally(() =>{
 				window.location.reload();
 			})
-		
+		}
 	}
 
 	render() {
