@@ -68,9 +68,33 @@ function ReviewerRow(props) {
 	const [lName, setLName] = useState(props.lName);
 	const [email, setEmail] = useState(props.email);
 
-	const updateRow = (data) => {
-		toggleEdit(!editMode);
-		// TODO: Send UPDATE query to database.  Refresh row's data
+	const updateRow = (e) => {
+		e.preventDefault();
+		const data = {
+			fName: fName,
+			lName: lName,
+			email: email,
+			personID: props.personID,
+		}
+
+		// Only submit request if data changed
+		if (fName != props.fName || lName != props.lName || email != props.email){
+			axios.put(`${baseURL}reviewer/`, { data })
+				.then(res => {
+					console.log(res);
+				})
+				.catch((err) => {
+					console.log("error while updating reviewer row...");
+					alert("There was an error with the submission");
+					console.log(err);
+				})
+				.finally(() => {
+					toggleEdit(!editMode);
+					window.location.reload();
+				})
+		} else {
+			toggleEdit(!editMode);
+		}
 
 	}
 	
@@ -111,7 +135,7 @@ function ReviewerRow(props) {
 			}
 			<td>
 			{editMode 
-			? <Button variant="success" style={{margin: 3}} onClick={() => toggleEdit(!editMode)}>Confirm</Button>
+			? <Button variant="success" style={{margin: 3}} onClick={(e) => updateRow(e)}>Confirm</Button>
 			: <Button variant="warning" style={{margin: 3}} onClick={() => toggleEdit(!editMode)}>Edit</Button>
 			}
 			<Button variant="danger" style={{margin: 3}} onClick={() => deleteRow()}>Delete</Button>

@@ -65,10 +65,33 @@ function CompanyRow(props) {
 	const [location, setLocation] = useState(props.location);
 	const [year, setYear] = useState(props.year);
 
-	const updateRow = (data) => {
-		toggleEdit(!editMode);
-		// TODO: Send UPDATE query to database.  Refresh row's data
+	const updateRow = (e) => {
+		e.preventDefault();
+		const data = {
+			companyName: companyName,
+			location: location,
+			year: year,
+			companyID: props.companyID,
+		}
 
+		// Only submit request if data changed
+		if (companyName != props.companyName || location != props.location || year != props.year){
+			axios.put(`${baseURL}company/`, { data })
+				.then(res => {
+					console.log(res);
+				})
+				.catch((err) => {
+					console.log("error while updating company row...");
+					alert("There was an error with the submission");
+					console.log(err);
+				})
+				.finally(() => {
+					toggleEdit(!editMode);
+					window.location.reload();
+				})
+		} else {
+			toggleEdit(!editMode);
+		}
 	}
 	
 	const deleteRow = () => {
@@ -108,7 +131,7 @@ function CompanyRow(props) {
 			}
 			<td>
 			{editMode 
-			? <Button variant="success" style={{margin: 3}} onClick={() => toggleEdit(!editMode)}>Confirm</Button>
+			? <Button variant="success" style={{margin: 3}} onClick={(e) => updateRow(e)}>Confirm</Button>
 			: <Button variant="warning" style={{margin: 3}} onClick={() => toggleEdit(!editMode)}>Edit</Button>
 			}
 			<Button variant="danger" style={{margin: 3}} onClick={() => deleteRow()}>Delete</Button>
