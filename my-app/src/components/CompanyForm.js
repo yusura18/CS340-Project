@@ -37,6 +37,7 @@ class CompanyForm extends React.Component {
     // alert('form was submited with: ' + this.state.companyName + this.state.location + this.state.year);
     event.preventDefault();
 	const payload = this.state;
+	const re = /^[0-9\b]+$/;
 
 	// Validate input fields
 	if (this.state.companyName == "" || this.state.location == "") {
@@ -45,6 +46,9 @@ class CompanyForm extends React.Component {
 		} else {
 			alert("Please enter a location.");
 		}
+	} else if (!re.test(this.state.year)) {
+		alert("Please enter a valid year.")
+
 	} else {
 		axios.post(baseURL, { payload })
 		.then(res => {
