@@ -40,13 +40,13 @@ class CompanyForm extends React.Component {
 	const re = /^[0-9\b]+$/;
 
 	// Validate input fields
-	if (this.state.companyName == "" || this.state.location == "") {
-		if (this.state.companyName == "") {
+	if (this.state.companyName === "" || this.state.location === "") {
+		if (this.state.companyName === "") {
 			alert("Please enter a Company name.");
 		} else {
 			alert("Please enter a location.");
 		}
-	} else if (!re.test(this.state.year)) {
+	} else if ((this.state.year !== "" && !re.test(this.state.year)) || (900 > this.state.year > 2021)) {
 		alert("Please enter a valid year.")
 
 	} else {
@@ -75,7 +75,7 @@ class CompanyForm extends React.Component {
 					</label>
 					<label>
 						Year Founded:
-						<input type="text" name="year" value={this.state.year} onChange={this.handleInputChange}/>
+						<input type="number" name="year" value={this.state.year} onChange={this.handleInputChange}/>
 					</label>
 					<input type="submit" value="Submit" onClick={this.handleSubmit}/>
 				</form>
