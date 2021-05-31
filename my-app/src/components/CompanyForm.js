@@ -46,7 +46,7 @@ class CompanyForm extends React.Component {
 		} else {
 			alert("Please enter a location.");
 		}
-	} else if ((this.state.year !== "" && !re.test(this.state.year)) || (900 > this.state.year > 2021)) {
+	} else if ((this.state.year !== "" && !re.test(this.state.year)) || (this.state.year < 900 || this.state.year > 2021)) {
 		alert("Please enter a valid year.")
 
 	} else {
