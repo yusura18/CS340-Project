@@ -35,6 +35,7 @@ class ReviewForm extends React.Component {
 		});
 	}
 	
+	// Send query to CREATE new review
   	handleSubmit(event) {
 		event.preventDefault();
 
@@ -56,6 +57,7 @@ class ReviewForm extends React.Component {
 		
   	}
 
+	// Render review form
 	render() {
 		return (
 			<div>

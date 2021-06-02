@@ -8,6 +8,7 @@ import Sake from '../pages/sake';
 
 const baseURL = "http://localhost:6531/";
 
+// Render Sake table
 function SakeTable(props) {
 	
   	return (
@@ -36,6 +37,7 @@ function SakeTable(props) {
 	);
 }
 
+// Render individual rows
 const SakeRow = (props) => {
 	const [editMode, toggleEdit] = useState(false);
 	const [sakeName, setSakeName] = useState(props.sakeName);
@@ -44,6 +46,7 @@ const SakeRow = (props) => {
 	const [style, setStyle] = useState(props.style);
 	const [cultivar, setCultivar] = useState(props.cultivar);
 
+	// Send query to UPDATE sake data
 	const updateRow = (e) => {
 		e.preventDefault();
 		const data = {
@@ -88,6 +91,7 @@ const SakeRow = (props) => {
 		}
 	}	
 	
+	// Send query to DELETE this sake
 	const deleteRow = () => {
 		axios.delete(`${baseURL}sake/`, {data: {sakeID: props.sakeID}})
 			.then(res => {

@@ -12,6 +12,7 @@ const baseURL = "http://localhost:6531/";
 function CompanyTable(props) {
 	const [companyData, setData] = useState([]);
 
+	// Send query to gather all Company data when component mounts
 	useEffect(() => {
 		console.log('fetching company data...');
 		axios.get(`${baseURL}company/`, { crossDomain: true })
@@ -27,13 +28,6 @@ function CompanyTable(props) {
 				console.log(err);
 			})
 	}, []);
-	// Temp hardcoded values
-	// const testArray = [
-	// 	{companyID: 0, companyName: "test10", location: "test11", year: "test12"},
-	// 	{companyID: 1, companyName: "test20", location: "test21", year: "test22"},
-	// 	{companyID: 2, companyName: "test30", location: "test31", year: "test32"}
-	// ];
-
 
   	return (
 		<div>
@@ -59,12 +53,14 @@ function CompanyTable(props) {
 }
 
 
+// Renders the individual table rows
 function CompanyRow(props) {
 	const [editMode, toggleEdit] = useState(false);
 	const [companyName, setCompanyName] = useState(props.companyName);
 	const [location, setLocation] = useState(props.location);
 	const [year, setYear] = useState(props.year);
 
+	// Sends query to UPDATE Company data
 	const updateRow = (e) => {
 		e.preventDefault();
 		const re = /^[0-9\b]+$/;
@@ -104,6 +100,7 @@ function CompanyRow(props) {
 		}
 	}
 	
+	// Sends query to DELETE Company data
 	const deleteRow = () => {
 		axios.delete(`${baseURL}company/`, {data: {companyID: props.companyID}})
 			.then(res => {
@@ -118,6 +115,7 @@ function CompanyRow(props) {
 			})
 	}
 
+	// Render row
 	return (
 		<tr key={props.companyID}>
 			<td>{props.companyID}</td>

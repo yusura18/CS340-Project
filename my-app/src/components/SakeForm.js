@@ -2,18 +2,10 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
-/*
-	sakeID
-	sakeName
-	companyID
-	region
-	style
-	cultivar
-	rating
-*/
+
 const baseURL = "http://localhost:6531/";
 
-
+// Render form to create new Sake
 class SakeForm extends React.Component {
 	constructor(props) {
 		super(props);
@@ -40,6 +32,7 @@ class SakeForm extends React.Component {
 		});
 	}
 
+	// Submit new sake 
   	handleSubmit(event) {
 		event.preventDefault();
 		console.log("sending sake post");

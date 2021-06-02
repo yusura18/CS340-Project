@@ -2,13 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 
-/*
-	personID
-    fName
-    lName
-    email
-*/
-const baseURL = "http://localhost:6531/reviewer/";
+const baseURL = "http://localhost:6531/";
 
 
 class ReviewerForm extends React.Component {
@@ -24,7 +18,7 @@ class ReviewerForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleInputChange (event) {
+  	handleInputChange (event) {
 		const target = event.target;
 		const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
@@ -34,34 +28,35 @@ class ReviewerForm extends React.Component {
 		});
 	}
 
-  handleSubmit(event) {
-    // alert('form was submited with: ' + this.state.sake + this.state.person + this.state.rating + this.state.comment);
-    event.preventDefault();
+	// Add new Reviewer
+	handleSubmit(event) {
+		event.preventDefault();
 
-	// Email validation pattern
-	const pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-	
-	console.log("sending reviewer post");
-	const payload = this.state;
+		// Email validation pattern
+		const pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+		
+		console.log("sending reviewer post");
+		const payload = this.state;
 
-	// Validate input fields
-	if (this.state.fName === "") {
-		alert("Please enter first name.");
-	} else if (this.state.lName === "") {
-		alert("Please enter last name.");
-	} else if (this.state.email === "" || !pattern.test(this.state.email)) {
-		alert("Please enter a valid email.");
-	} else {
-		axios.post(baseURL, { payload })
-		.then(res => {
-			console.log(res.status)
-		})
-		.finally(() =>{
-			window.location.reload();
-		})
+		// Validate input fields
+		if (this.state.fName === "") {
+			alert("Please enter first name.");
+		} else if (this.state.lName === "") {
+			alert("Please enter last name.");
+		} else if (this.state.email === "" || !pattern.test(this.state.email)) {
+			alert("Please enter a valid email.");
+		} else {
+			axios.post(`${baseURL}reviewer/`, { payload })
+			.then(res => {
+				console.log(res.status)
+			})
+			.finally(() =>{
+				window.location.reload();
+			})
+		}
 	}
-  }
 
+	// Render form
 	render() {
 		return (
 			<div>

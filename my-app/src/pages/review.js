@@ -10,6 +10,7 @@ const Review = () => {
     const [sakeData, setSakeData] = useState([]);
     const [reviewerData, setReviewerData] = useState([]);
 
+    // Defines Sake query function for later use
     const getSakeData = () => {
         axios.get(`${baseURL}sake/dropdown`, { crossDomain: true })
         	.then(res => {
@@ -22,6 +23,7 @@ const Review = () => {
         	})
     }
 
+    // Defines Reviewer query function for later use
     const getReviewerData = () => {
         axios.get(`${baseURL}reviewer/dropdown`, { crossDomain: true })
         	.then(res => {
@@ -34,17 +36,15 @@ const Review = () => {
         	})
     }
 
+    // Get info for form dropdowns
     useEffect(() => {
-        //this.getAllSake();
-
-        // Get info for form dropdowns
         getSakeData();
         getReviewerData();
         
     }, []);
 
+    // Render form and table
     return (
-
         <div>
              <br />
             <div class="container shadow-sm rounded border border-dark">

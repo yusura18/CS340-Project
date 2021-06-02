@@ -22,7 +22,7 @@ class searchData extends React.Component {
         this.handleClear = this.handleClear.bind(this);
     }
 
-
+    // Method to retrieve all Sake data
     getAllSake = () => {
         console.log('fetching all sake data...');
 		axios.get(`${baseURL}sake/`, { crossDomain: true })
@@ -37,20 +37,10 @@ class searchData extends React.Component {
 				console.log(err);
 			})
     }
+
+    // Retrieve all sake on component mount
     componentDidMount() {
         this.getAllSake();
-
-        // // Get company info for dropdown
-        // axios.get(`${baseURL}company/dropdown`, { crossDomain: true })
-		// 	.then(res => {
-		// 		const coJSON = JSON.parse(res.data.company);
-		// 		console.log(coJSON);
-        //         this.setState({companyData: coJSON})
-		// 	})
-		// 	.catch((err) =>{
-		// 		console.log("error while fetching companies...")
-		// 		console.log(err);
-		// 	})
     }
 
     handleInputChange = (event) => {
@@ -96,6 +86,7 @@ class searchData extends React.Component {
 
     }
     
+    // Render search form
     render() {
         return (
             <section>

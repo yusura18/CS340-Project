@@ -7,16 +7,11 @@ import axios from 'axios';
 
 const baseURL = "http://localhost:6531/";
 
-/*
-	personID
-    fName
-    lName
-    email
-*/
 
 function ReviewerTable(props) {
 	const [reviewerData, setData] = useState([]);
 
+	// Fetches all reviewer data
 	useEffect(() => {
 		console.log('fetching reviewer data...');
 		axios.get(`${baseURL}reviewer/`, { crossDomain: true })
@@ -33,41 +28,38 @@ function ReviewerTable(props) {
 			})
 	}, []);
 
-    // const testArray = [
-	// 	{personID: 0, fName: "test10", lName: "test11", email: "test12"},
-	// 	{personID: 1, fName: "test20", lName: "test21", email: "test22"},
-	// 	{personID: 2, fName: "test30", lName: "test31", email: "test32"}
-	// ];
-
+	// Render Table
     return (
-          <div>
-              <h1>Reviewer Table</h1>
-              <Table striped bordered hover>
-                  <thead>
-                      <tr>
-                          <th>Person ID</th>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Email</th>
-                      </tr>
-                  </thead>
-                  <tbody id="tableBody">
-                    {reviewerData.map((row, index) => {
-						return(
-							<ReviewerRow personID={row.personID} fName={row.fName} lName={row.lName} email={row.email} />)
-					})}
-                  </tbody>
-              </Table>
-          </div>
-      );
-  }
+		<div>
+			<h1>Reviewer Table</h1>
+			<Table striped bordered hover>
+				<thead>
+					<tr>
+						<th>Person ID</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Email</th>
+					</tr>
+				</thead>
+				<tbody id="tableBody">
+				{reviewerData.map((row, index) => {
+					return(
+						<ReviewerRow personID={row.personID} fName={row.fName} lName={row.lName} email={row.email} />)
+				})}
+				</tbody>
+			</Table>
+		</div>
+    );
+}
 
+// Renders individual rows of the table
 function ReviewerRow(props) {
 	const [editMode, toggleEdit] = useState(false);
 	const [fName, setFName] = useState(props.fName);
 	const [lName, setLName] = useState(props.lName);
 	const [email, setEmail] = useState(props.email);
 
+	// Sends UPDATE query for this reviewer's data
 	const updateRow = (e) => {
 		e.preventDefault();
 		const data = {
@@ -108,6 +100,7 @@ function ReviewerRow(props) {
 		}
 	}
 	
+	// Send query to DELETE this reviewer
 	const deleteRow = () => {
 		axios.delete(`${baseURL}reviewer/`, {data: {personID: props.personID}})
 			.then(res => {
@@ -122,6 +115,7 @@ function ReviewerRow(props) {
 			})
 	}
 
+	// Render row
 	return (
 		<tr key={props.personID}>
 			<td>{props.personID}</td>
@@ -155,19 +149,4 @@ function ReviewerRow(props) {
 }
 
 
-// function ReviewerRow(props) {
-//     return (
-//         <tr>
-//             <td>{props.personID}</td>
-//             <td>{props.fName}</td>
-//             <td>{props.lName}</td>
-//             <td>{props.email}</td>
-//             <Button variant="warning" style={{margin: 3}}>Edit</Button>
-// 			<Button variant="danger" style={{margin: 3}}>Delete</Button>
-//         </tr>
-//     );
-  
-// }
-  
-  
-  export default ReviewerTable
+export default ReviewerTable

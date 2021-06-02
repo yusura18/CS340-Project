@@ -10,9 +10,7 @@ const Sake = () => {
     const [coData, setCoData] = useState([]);
 
     useEffect(() => {
-        //this.getAllSake();
-
-        // Get company info for dropdown
+        // Get company info for dropdowns on page load
         axios.get(`${baseURL}company/dropdown`, { crossDomain: true })
         	.then(res => {
         		const coJSON = JSON.parse(res.data.company);
@@ -25,6 +23,7 @@ const Sake = () => {
         	})
     }, []);
 
+    // Render Sake form and table
     return (
         <div>
             <br />

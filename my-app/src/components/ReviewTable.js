@@ -11,6 +11,7 @@ const baseURL = "http://localhost:6531/";
 function ReviewTable(props) {
 	const [reviewData, setData] = useState([]);
 
+	// Fetches all review data
 	useEffect(() => {
 		console.log('fetching review data...');
 		axios.get(`${baseURL}review/`, { crossDomain: true })
@@ -27,6 +28,7 @@ function ReviewTable(props) {
 			})
 	}, []);
 
+	// Render table
     return (
         <div>
             <h1>Review Table</h1>
@@ -51,6 +53,7 @@ function ReviewTable(props) {
     );
 }
 
+// Renders individual table row
 function ReviewRow(props) {
 	const [editMode, toggleEdit] = useState(false);
 	const [sakeID, setSakeID] = useState(props.sakeID);
@@ -58,6 +61,7 @@ function ReviewRow(props) {
 	const [rating, setRating] = useState(props.rating);
 	const [comment, setComment] = useState(props.comment);
 
+	// Sends query to UPDATE a review
 	const updateRow = (e) => {
 		e.preventDefault();
 		const data = {
@@ -81,7 +85,7 @@ function ReviewRow(props) {
 				})
 				.finally(() => {
 					toggleEdit(!editMode);
-					//alert("submit successfull");
+					//alert(res.msg);
 					window.location.reload();
 				})
 		} else {
@@ -90,6 +94,7 @@ function ReviewRow(props) {
 
 	}
 	
+	// Sends query to DELETE a review
 	const deleteRow = () => {
 		axios.delete(`${baseURL}review/`, {data: {reviewID: props.reviewID}})
 			.then(res => {
@@ -104,6 +109,7 @@ function ReviewRow(props) {
 			})
 	}
 
+	// Render row component
 	return (
 		<tr key={props.reviewID}>
 			<td>{props.reviewID}</td>
