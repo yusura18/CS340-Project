@@ -5,8 +5,10 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
-const baseURL = "http://localhost:6531/";
 
+// Source: https://stackoverflow.com/questions/18042133/check-if-input-is-number-or-letter-javascript
+
+const baseURL = "http://localhost:6531/";
 
 
 function CompanyTable(props) {
@@ -63,7 +65,7 @@ function CompanyRow(props) {
 	// Sends query to UPDATE Company data
 	const updateRow = (e) => {
 		e.preventDefault();
-		const re = /^[0-9\b]+$/;
+		const re = /^[0-9\b]+$/;		// Test for digits in a string
 		const data = {
 			companyName: companyName,
 			location: location,
@@ -80,7 +82,8 @@ function CompanyRow(props) {
 			} else if ((year.length > 0 && !re.test(year)) || (year.length > 0 && (Number(year) < 900 || Number(year) > 2021))) {
 				alert("Please enter a valid year between 900 and 2021.");
 			} else {
-				
+
+				// Create put request and update the row of the company table
 				axios.put(`${baseURL}company/`, { data })
 					.then(res => {
 						console.log(res);

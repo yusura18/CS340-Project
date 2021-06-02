@@ -42,6 +42,8 @@ class ReviewForm extends React.Component {
 		console.log("sending review post");
 		const payload = this.state;
 		console.log("review payload is " + JSON.stringify(this.state));
+		
+		// Send post to server with new table entry & refresh page
 		axios.post(`${baseURL}review/`, { payload })
 			.then(res => {
 				console.log(JSON.stringify(res.status));

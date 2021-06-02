@@ -72,8 +72,10 @@ function ReviewRow(props) {
 			reviewID: props.reviewID,
 		}
 		console.log(data);
+		
 		// Only submit request if data changed
 		if (sakeID != props.sakeID || personID != props.personID || rating != props.rating || comment != props.comment ){
+			// Send put request to update row of review table
 			axios.put(`${baseURL}review/`, { data })
 				.then(res => {
 					console.log(res);

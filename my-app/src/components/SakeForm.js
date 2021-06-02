@@ -46,6 +46,7 @@ class SakeForm extends React.Component {
 		} else if (this.state.style === "") {
 			alert("Please enter a style.")
 		} else {
+			// Send post to server with new table entry & refresh page
 			axios.post(baseURL + "sake/", { payload })
 			.then(res => {
 				console.log(res.status);

@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 
 const baseURL = "http://localhost:6531/";
 
+// Company form component used to insert a new item into company entity
 
 class CompanyForm extends React.Component {
 	constructor(props) {

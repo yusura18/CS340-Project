@@ -5,6 +5,9 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
+
+// Source: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
+
 const baseURL = "http://localhost:6531/";
 
 
@@ -81,6 +84,7 @@ function ReviewerRow(props) {
 			} else if (email === "" || !pattern.test(email)) {
 				alert("Please enter a valid updated email.");
 			} else {
+				// Send put request to update row of reviewer table
 				axios.put(`${baseURL}reviewer/`, { data })
 					.then(res => {
 						console.log(res);

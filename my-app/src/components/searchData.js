@@ -15,7 +15,6 @@ class searchData extends React.Component {
             attribute: 'sakeName',
             query: '',
             resData: [],
-            // companyData: [],
             };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
