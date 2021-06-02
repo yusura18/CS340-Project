@@ -6,11 +6,14 @@ import {
     NavMenu,
 } from './navbarElements';
 
+
+// Source: https://www.geeksforgeeks.org/create-a-responsive-navbar-using-reactjs/
+
 const Navbar = () => {
     return (
         <>
             <Nav>
-                <Bars />
+                <Bars />       
 
                 <NavMenu>
                     <NavLink to='/sake' activeStyles>

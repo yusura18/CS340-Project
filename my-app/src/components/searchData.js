@@ -15,7 +15,6 @@ class searchData extends React.Component {
             attribute: 'sakeName',
             query: '',
             resData: [],
-            // companyData: [],
             };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,18 +38,6 @@ class searchData extends React.Component {
     }
     componentDidMount() {
         this.getAllSake();
-
-        // // Get company info for dropdown
-        // axios.get(`${baseURL}company/dropdown`, { crossDomain: true })
-		// 	.then(res => {
-		// 		const coJSON = JSON.parse(res.data.company);
-		// 		console.log(coJSON);
-        //         this.setState({companyData: coJSON})
-		// 	})
-		// 	.catch((err) =>{
-		// 		console.log("error while fetching companies...")
-		// 		console.log(err);
-		// 	})
     }
 
     handleInputChange = (event) => {

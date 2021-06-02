@@ -9,7 +9,7 @@ import Reviewer from './pages/reviewer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-// Need to render components (form, tables, search field) for each page
+// Render components (form, tables, search field) for each page
 function App() {
   return (
 

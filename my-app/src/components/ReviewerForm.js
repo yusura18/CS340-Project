@@ -8,6 +8,10 @@ import Button from 'react-bootstrap/Button';
     lName
     email
 */
+
+// Source: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
+
+
 const baseURL = "http://localhost:6531/reviewer/";
 
 
@@ -51,6 +55,7 @@ class ReviewerForm extends React.Component {
 	} else if (this.state.email === "" || !pattern.test(this.state.email)) {
 		alert("Please enter a valid email.");
 	} else {
+		// Send post to server with new table entry & refresh page
 		axios.post(baseURL, { payload })
 		.then(res => {
 			console.log(res.status)

@@ -35,7 +35,6 @@ const Review = () => {
     }
 
     useEffect(() => {
-        //this.getAllSake();
 
         // Get info for form dropdowns
         getSakeData();

@@ -2,6 +2,9 @@ import { FaBars } from 'react-icons/fa';
 import { NavLink as Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+// Source: https://www.geeksforgeeks.org/create-a-responsive-navbar-using-reactjs/
+// CSS styling for Navbar, NavLinks, and NavMenu 
+
 export const Nav = styled.nav`
     background: #483D8B;
     height: 55px;

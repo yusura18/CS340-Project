@@ -69,6 +69,7 @@ const SakeRow = (props) => {
 			} else if (style === "") {
 				alert("Please enter the updated style.");
 			} else {
+				// Semd put request to update item of sake table
 				axios.put(`${baseURL}sake/`, { data })
 					.then(res => {
 						console.log(res);

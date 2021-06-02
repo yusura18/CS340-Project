@@ -8,8 +8,12 @@ import Button from 'react-bootstrap/Button';
 	location
 	year
 */
+
+// Source: https://stackoverflow.com/questions/18042133/check-if-input-is-number-or-letter-javascript
+
 const baseURL = "http://localhost:6531/company/";
 
+// Company form component used to insert a new item into company entity
 
 class CompanyForm extends React.Component {
 	constructor(props) {
@@ -34,9 +38,10 @@ class CompanyForm extends React.Component {
 	}
 
   handleSubmit(event) {
-    // alert('form was submited with: ' + this.state.companyName + this.state.location + this.state.year);
     event.preventDefault();
 	const payload = this.state;
+
+	// Test used to check year input is a number
 	const re = /^[0-9\b]+$/;
 
 	// Validate input fields
@@ -47,6 +52,7 @@ class CompanyForm extends React.Component {
 	} else if ((this.state.year.length > 0 && !re.test(this.state.year)) || (this.state.year.length > 0 && (Number(this.state.year) < 900 || Number(this.state.year) > 2021))) {
 		alert("Please enter a valid year between 900 and 2021.");
 	} else {
+		// Send post to server with new table entry & refresh page
 		axios.post(baseURL, { payload })
 		.then(res => {
 			console.log(res.status);
