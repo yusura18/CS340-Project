@@ -62,19 +62,27 @@ const SakeRow = (props) => {
 
 		// Only submit request if data changed
 		if (sakeName != props.sakeName || companyID != props.companyID || region != props.region || style != props.style || cultivar != props.cultivar){
-			axios.put(`${baseURL}sake/`, { data })
-				.then(res => {
-					console.log(res);
-				})
-				.catch((err) => {
-					console.log("error while updating sake row...");
-					alert("There was an error with the submission");
-					console.log(err);
-				})
-				.finally(() => {
-					toggleEdit(!editMode);
-					window.location.reload();
-				})
+			if (sakeName === "") {
+				alert("Please enter the updated Sake Name.");
+			} else if (region === "") {
+				alert("Please enter the updated region.");
+			} else if (style === "") {
+				alert("Please enter the updated style.");
+			} else {
+				axios.put(`${baseURL}sake/`, { data })
+					.then(res => {
+						console.log(res);
+					})
+					.catch((err) => {
+						console.log("error while updating sake row...");
+						alert("There was an error with the submission");
+						console.log(err);
+					})
+					.finally(() => {
+						toggleEdit(!editMode);
+						window.location.reload();
+					})
+				}
 		} else {
 			toggleEdit(!editMode);
 		}

@@ -46,14 +46,12 @@ class SakeForm extends React.Component {
 		const payload = this.state;
 		
 		// Validate input fields
-		if (this.state.sakeName == "" || this.state.region == "" || this.state.style == ""){
-			if (this.state.sakeName == "") {
-				alert("Please enter a Sake name.")
-			} else if (this.state.region == "") {
-				alert("Please enter a region.")
-			} else {
-				alert("Please enter a style.")
-			}
+		if (this.state.sakeName === "") {
+			alert("Please enter a Sake name.")
+		} else if (this.state.region === "") {
+			alert("Please enter a region.")
+		} else if (this.state.style === "") {
+			alert("Please enter a style.")
 		} else {
 			axios.post(baseURL + "sake/", { payload })
 			.then(res => {

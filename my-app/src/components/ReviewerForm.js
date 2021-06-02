@@ -37,18 +37,20 @@ class ReviewerForm extends React.Component {
   handleSubmit(event) {
     // alert('form was submited with: ' + this.state.sake + this.state.person + this.state.rating + this.state.comment);
     event.preventDefault();
+
+	// Email validation pattern
+	const pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+	
 	console.log("sending reviewer post");
 	const payload = this.state;
 
 	// Validate input fields
-	if (this.state.fName == "" || this.state.lName == "" || this.state.email == "") {
-		if (this.state.fName == "") {
-			alert("Please enter first name.");
-		} else if (this.state.lName == "") {
-			alert("Please enter last name.");
-		} else {
-			alert("Please enter email.");
-		}
+	if (this.state.fName === "") {
+		alert("Please enter first name.");
+	} else if (this.state.lName === "") {
+		alert("Please enter last name.");
+	} else if (this.state.email === "" || !pattern.test(this.state.email)) {
+		alert("Please enter a valid email.");
 	} else {
 		axios.post(baseURL, { payload })
 		.then(res => {

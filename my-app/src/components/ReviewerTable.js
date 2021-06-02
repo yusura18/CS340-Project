@@ -77,25 +77,35 @@ function ReviewerRow(props) {
 			personID: props.personID,
 		}
 
+		// Email validation pattern
+		const pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+
 		// Only submit request if data changed
 		if (fName != props.fName || lName != props.lName || email != props.email){
-			axios.put(`${baseURL}reviewer/`, { data })
-				.then(res => {
-					console.log(res);
-				})
-				.catch((err) => {
-					console.log("error while updating reviewer row...");
-					alert("There was an error with the submission");
-					console.log(err);
-				})
-				.finally(() => {
-					toggleEdit(!editMode);
-					window.location.reload();
-				})
+			if (fName === "") {
+				alert("Please enter the updated first name.");
+			} else if (lName === "") {
+				alert("Please enter the updated last name.");
+			} else if (email === "" || !pattern.test(email)) {
+				alert("Please enter a valid updated email.");
+			} else {
+				axios.put(`${baseURL}reviewer/`, { data })
+					.then(res => {
+						console.log(res);
+					})
+					.catch((err) => {
+						console.log("error while updating reviewer row...");
+						alert("There was an error with the submission");
+						console.log(err);
+					})
+					.finally(() => {
+						toggleEdit(!editMode);
+						window.location.reload();
+					})
+			}
 		} else {
 			toggleEdit(!editMode);
 		}
-
 	}
 	
 	const deleteRow = () => {

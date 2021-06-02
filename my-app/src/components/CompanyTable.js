@@ -67,6 +67,7 @@ function CompanyRow(props) {
 
 	const updateRow = (e) => {
 		e.preventDefault();
+		const re = /^[0-9\b]+$/;
 		const data = {
 			companyName: companyName,
 			location: location,
@@ -75,20 +76,29 @@ function CompanyRow(props) {
 		}
 
 		// Only submit request if data changed
-		if (companyName != props.companyName || location != props.location || year != props.year){
-			axios.put(`${baseURL}company/`, { data })
-				.then(res => {
-					console.log(res);
-				})
-				.catch((err) => {
-					console.log("error while updating company row...");
-					alert("There was an error with the submission");
-					console.log(err);
-				})
-				.finally(() => {
-					toggleEdit(!editMode);
-					window.location.reload();
-				})
+		if (companyName !== props.companyName || location !== props.location || year !== props.year){
+			if (companyName === "") {
+				alert("Please enter the updated Company Name.");
+			} else if (location === "") {
+				alert("Please enter the updated location.");
+			} else if ((year.length > 0 && !re.test(year)) || (year.length > 0 && (Number(year) < 900 || Number(year) > 2021))) {
+				alert("Please enter a valid year between 900 and 2021.");
+			} else {
+				
+				axios.put(`${baseURL}company/`, { data })
+					.then(res => {
+						console.log(res);
+					})
+					.catch((err) => {
+						console.log("error while updating company row...");
+						alert("There was an error with the submission");
+						console.log(err);
+					})
+					.finally(() => {
+						toggleEdit(!editMode);
+						window.location.reload();
+					})
+			}
 		} else {
 			toggleEdit(!editMode);
 		}

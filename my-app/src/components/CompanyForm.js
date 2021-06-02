@@ -17,7 +17,7 @@ class CompanyForm extends React.Component {
     this.state = {
 			companyName: '',
 			location: '',
-			year: ''
+			year: '',
 		};
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,15 +40,12 @@ class CompanyForm extends React.Component {
 	const re = /^[0-9\b]+$/;
 
 	// Validate input fields
-	if (this.state.companyName === "" || this.state.location === "") {
-		if (this.state.companyName === "") {
-			alert("Please enter a Company name.");
-		} else {
-			alert("Please enter a location.");
-		}
-	} else if ((this.state.year !== "" && !re.test(this.state.year)) || (this.state.year < 900 || this.state.year > 2021)) {
-		alert("Please enter a valid year.")
-
+	if (this.state.companyName === "") {
+		alert("Please enter a Company name.");
+	} else if (this.state.location === "") {
+		alert("Please enter a location.");
+	} else if ((this.state.year.length > 0 && !re.test(this.state.year)) || (this.state.year.length > 0 && (Number(this.state.year) < 900 || Number(this.state.year) > 2021))) {
+		alert("Please enter a valid year between 900 and 2021.");
 	} else {
 		axios.post(baseURL, { payload })
 		.then(res => {
@@ -75,7 +72,7 @@ class CompanyForm extends React.Component {
 					</label>
 					<label>
 						Year Founded:
-						<input type="number" name="year" value={this.state.year} onChange={this.handleInputChange}/>
+						<input type="text" name="year" value={this.state.year} onChange={this.handleInputChange}/>
 					</label>
 					<input type="submit" value="Submit" onClick={this.handleSubmit}/>
 				</form>
