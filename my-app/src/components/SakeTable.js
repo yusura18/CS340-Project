@@ -1,12 +1,11 @@
 import React, {
-	useState, useEffect,
+	useState,
 	} from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import Sake from '../pages/sake';
+import baseURL from '../axios';
 
-const baseURL = "http://localhost:6531/";
 
 // Render Sake table
 function SakeTable(props) {

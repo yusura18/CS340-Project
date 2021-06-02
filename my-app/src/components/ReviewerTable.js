@@ -4,11 +4,9 @@ import React, {
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-
+import baseURL from '../axios';
 
 // Source: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
-
-const baseURL = "http://localhost:6531/";
 
 
 function ReviewerTable(props) {

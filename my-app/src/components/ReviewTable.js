@@ -4,8 +4,7 @@ import React, {
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-
-const baseURL = "http://localhost:6531/";
+import baseURL from '../axios';
 
 
 function ReviewTable(props) {

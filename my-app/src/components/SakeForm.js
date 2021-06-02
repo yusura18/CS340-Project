@@ -1,9 +1,7 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
 import axios from 'axios';
+import baseURL from '../axios';
 
-
-const baseURL = "http://localhost:6531/";
 
 // Render form to create new Sake
 class SakeForm extends React.Component {

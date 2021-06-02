@@ -1,8 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-
-const baseURL = "http://localhost:6531/";
+import baseURL from '../axios';
 
 // Company form component used to insert a new item into company entity
 

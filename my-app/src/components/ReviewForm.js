@@ -1,16 +1,7 @@
 import axios from 'axios';
 import React from 'react';
-import Button from 'react-bootstrap/Button';
+import baseURL from '../axios';
 
-/*
-	reviewID
-    sakeID
-    personID
-    rating
-    comment 
-
-*/
-const baseURL = "http://localhost:6531/";
 
 class ReviewForm extends React.Component {
 	constructor(props) {

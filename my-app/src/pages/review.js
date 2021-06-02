@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ReviewTable from '../components/ReviewTable';
 import ReviewForm from '../components/ReviewForm';
-
-const baseURL = "http://localhost:6531/";
+import baseURL from '../axios';
 
 
 const Review = () => {

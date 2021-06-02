@@ -4,8 +4,7 @@ import React, {
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import SakeTable from './SakeTable';
-
-const baseURL = "http://localhost:6531/";
+import baseURL from '../axios';
 
 
 class searchData extends React.Component {

@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SakeForm from '../components/SakeForm';
 import SearchData from '../components/searchData';
 import axios from 'axios';
-
-const baseURL = "http://localhost:6531/";
+import baseURL from '../axios';
 
 
 const Sake = () => {
