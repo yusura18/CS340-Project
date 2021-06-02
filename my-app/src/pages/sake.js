@@ -10,7 +10,6 @@ const Sake = () => {
     const [coData, setCoData] = useState([]);
 
     useEffect(() => {
-        //this.getAllSake();
 
         // Get company info for dropdown
         axios.get(`${baseURL}company/dropdown`, { crossDomain: true })

@@ -35,7 +35,6 @@ class ReviewerForm extends React.Component {
 	}
 
   handleSubmit(event) {
-    // alert('form was submited with: ' + this.state.sake + this.state.person + this.state.rating + this.state.comment);
     event.preventDefault();
 
 	// Email validation pattern

@@ -33,12 +33,6 @@ function ReviewerTable(props) {
 			})
 	}, []);
 
-    // const testArray = [
-	// 	{personID: 0, fName: "test10", lName: "test11", email: "test12"},
-	// 	{personID: 1, fName: "test20", lName: "test21", email: "test22"},
-	// 	{personID: 2, fName: "test30", lName: "test31", email: "test32"}
-	// ];
-
     return (
           <div>
               <h1>Reviewer Table</h1>
@@ -153,21 +147,6 @@ function ReviewerRow(props) {
 		</tr>
 	);
 }
-
-
-// function ReviewerRow(props) {
-//     return (
-//         <tr>
-//             <td>{props.personID}</td>
-//             <td>{props.fName}</td>
-//             <td>{props.lName}</td>
-//             <td>{props.email}</td>
-//             <Button variant="warning" style={{margin: 3}}>Edit</Button>
-// 			<Button variant="danger" style={{margin: 3}}>Delete</Button>
-//         </tr>
-//     );
-  
-// }
   
   
   export default ReviewerTable
