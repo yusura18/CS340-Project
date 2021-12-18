@@ -1,7 +1,14 @@
 import axios from 'axios';
 import React from 'react';
 import baseURL from '../axios';
-
+import Controls from "./Controls";
+import { useForm, Form } from "./useForm";
+// core components
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
+import MenuItem from "@mui/material/MenuItem";
+import Button from "components/CustomButtons/Button.js";
+import TextField from "@mui/material/TextField";
 
 class ReviewerForm extends React.Component {
 	constructor(props) {
@@ -57,24 +64,83 @@ class ReviewerForm extends React.Component {
 	// Render form
 	render() {
 		return (
-			<div>
-				<h1>Register Reviewer</h1>
-				<form>
-					<label>
-						First Name:
-						<input type="text" name="fName" value={this.state.fName} onChange={this.handleInputChange}/>
-					</label>
-					<label>
-                        Last Name:
-						<input type="text" name="lName" value={this.state.lName} onChange={this.handleInputChange}/>
-					</label>
-					<label>
-                        Email:
-						<input type="text" name="email" value={this.state.email} onChange={this.handleInputChange}/>
-					</label>
-					<input type="submit" value="Submit" onClick={this.handleSubmit}/>
-				</form>
-			</div>
+			<>
+			<form>
+			  <GridContainer
+				spacing={{ xs: 2, md: 3 }}
+				rows={{ xs: 12, sm: 6, md: 3 }}
+				justify="center"
+				style={{ alignItems: "middle" }}
+			  >
+				<GridItem xs={8} sm={4}>
+				  <TextField
+					id="fName"
+					name="fName"
+					label="First Name"
+					style={{ margin: "0.5rem" }}
+					required
+					value={this.state.fName}
+					onChange={this.handleInputChange}
+				  />
+				</GridItem>
+				<GridItem xs={8} sm={4}>
+				  <TextField
+					label="Last Name"
+					id="lName"
+					name="lName"
+					style={{ margin: "0.5rem" }}
+					required
+					value={this.state.lName}
+					onChange={this.handleInputChange}
+				  />
+				</GridItem>
+				<GridItem xs={8} sm={4}>
+				  <TextField
+					label="Email"
+					id="email"
+					name="email"
+					style={{ margin: "0.5rem" }}
+					required
+					value={this.state.email}
+					onChange={this.handleInputChange}
+				  />
+				</GridItem>
+				<GridItem xs={8} sm={4}>
+				  <Button
+					color="primary"
+					style={{
+					  marginLeft: "0.3rem",
+					  marginTop: "1rem",
+					  fontSize: "14px",
+					}}
+					round
+					onClick={this.handleSubmit}
+				  >
+					Submit
+				  </Button>
+				</GridItem>
+			  </GridContainer>
+			</form>
+		  </>
+	
+			// <div>
+			// 	<h1>Register Reviewer</h1>
+			// 	<form>
+			// 		<label htmlFor="fName">
+			// 			First Name:
+			// 			<input type="text" name="fName" id="fName" value={this.state.fName} onChange={this.handleInputChange}/>
+			// 		</label>
+			// 		<label htmlFor="lName">
+            //             Last Name:
+			// 			<input type="text" name="lName" id="lName" value={this.state.lName} onChange={this.handleInputChange}/>
+			// 		</label>
+			// 		<label htmlFor="email">
+            //             Email:
+			// 			<input type="text" name="email" id="email" value={this.state.email} onChange={this.handleInputChange}/>
+			// 		</label>
+			// 		<input type="submit" value="Submit" onClick={this.handleSubmit}/>
+			// 	</form>
+			// </div>
 		);
 	}
 }
